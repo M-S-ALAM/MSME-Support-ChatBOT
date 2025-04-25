@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping ChatBot</title>
+  <style>
+    body { font-family: Arial; margin: 40px; background: #f4f4f4; }
+    #chat-box { width: 100%; max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+    .msg { margin: 10px 0; }
+    .user { color: blue; }
+    .bot { color: green; }
+  </style>
+</head>
+<body>
+  <div id="chat-box">
+    <h2>🛒 Shopping ChatBot</h2>
+    <div id="chat-log"></div>
+    <input type="text" id="user-input" placeholder="Ask your question..." style="width: 80%;">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById('user-input');
+      const message = input.value.trim();
+      if (!message) return;
+
+      document.getElementById('chat-log').innerHTML += `<div class='msg user'><strong>You:</strong> ${message}</div>`;
+      input.value = '';
+
+      const response = await fetch('/chat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ message })
+      });
+
+      const data = await response.json();
+      const reply = data.type === 'table' ? data.content : `<strong>Bot:</strong> ${data.content}`;
+      document.getElementById('chat-log').innerHTML += `<div class='msg bot'>${reply}</div>`;
+    }
+  </script>
+</body>
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>
