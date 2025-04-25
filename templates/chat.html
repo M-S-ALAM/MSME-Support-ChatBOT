@@ -1,53 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Shopping ChatBot</title>
-  <style>
-    body { font-family: Arial; margin: 40px; background: #f4f4f4; }
-    #chat-box { width: 100%; max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
-    .msg { margin: 10px 0; }
-    .user { color: blue; }
-    .bot { color: green; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Intelligent Chatbot for MSMEs</title>
+  <link rel="stylesheet" href="/static/style.css"/>
 </head>
 <body>
-  <div id="chat-box">
-    <h2>🛒 Shopping ChatBot</h2>
-    <div id="chat-log"></div>
-    <input type="text" id="user-input" placeholder="Ask your question..." style="width: 80%;">
-    <button onclick="sendMessage()">Send</button>
+  <div class="chat-wrapper">
+    <header class="chat-header">
+      💬 <span class="title">Intelligent Chatbot for MSMEs</span>
+    </header>
+
+    <main id="chat-box" class="chat-box"></main>
+
+    <footer class="input-group">
+      <input id="user-input" type="text" placeholder="Query your Database here..." />
+      <button id="mic-button">🎤</button>
+      <button id="send-button">➤</button>
+    </footer>
   </div>
 
-  <script>
-    async function sendMessage() {
-      const input = document.getElementById('user-input');
-      const message = input.value.trim();
-      if (!message) return;
-
-      document.getElementById('chat-log').innerHTML += `<div class='msg user'><strong>You:</strong> ${message}</div>`;
-      input.value = '';
-
-      const response = await fetch('/chat', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ message })
-      });
-
-      const data = await response.json();
-      const reply = data.type === 'table' ? data.content : `<strong>Bot:</strong> ${data.content}`;
-      document.getElementById('chat-log').innerHTML += `<div class='msg bot'>${reply}</div>`;
-    }
-  </script>
-</body>
-</html>
-</title>
-</head>
-<body>
-
+  <script src="script.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,20 @@
+{
+    "3f41e546893dc64b71aaacad12cad815": {
+        "page_script_hash": "3f41e546893dc64b71aaacad12cad815",
+        "page_name": "Home",
+        "icon": "",
+        "script_path": "/home/shahbaz/Project/ChatBOT_Walmart/Home.py"
+    },
+    "ee100a767e1d6db9d6c6aec94d43c9c5": {
+        "page_script_hash": "ee100a767e1d6db9d6c6aec94d43c9c5",
+        "page_name": "intro",
+        "icon": "",
+        "script_path": "/home/shahbaz/Project/ChatBOT_Walmart/pages/01_intro.py"
+    },
+    "c2651116332b9978cce82f002b756e96": {
+        "page_script_hash": "c2651116332b9978cce82f002b756e96",
+        "page_name": "streamlit_text_test",
+        "icon": "",
+        "script_path": "/home/shahbaz/Project/ChatBOT_Walmart/pages/02_streamlit_text_test.py"
+    }
+}

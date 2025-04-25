@@ -1,0 +1,33 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_DATABASE:-walmart_chatbot_dummy}
+      MYSQL_USER: ${DB_USER:-shobot}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-shobot}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./walmart_chatbot_dummy.sql:/docker-entrypoint-initdb.d/init.sql
+
+  chatbot:
+    build: .
+    container_name: walmart_chatbot
+    depends_on:
+      - mysql
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      USERNAMES: ${USERNAMES}
+      PASSWORDS: ${PASSWORDS}
+      DB_TYPE: ${DB_TYPE}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8510:8501"
+    command: streamlit run main.py --server.port=8501 --server.enableCORS=false
