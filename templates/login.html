@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="/static/styles/login.css" />
+</head>
+<body>
+  <div class="login-container">
+    <img src="/static/img/msme.jpg" alt="MSME Logo" class="logo" />
+    <h2 style="color: red;">🔐 Intelligence MSME ChatBOT Login</h2>
+
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button onclick="login()">Login</button>
+
+    <p class="bottom-text">
+      Don't have an account? <a href="signup.html">Signup here</a>
+    </p>
+  </div>
+
+  <!-- Link to external JS -->
+  <script src="/static/javascripts/login.js"></script>
+</body>
+</html>

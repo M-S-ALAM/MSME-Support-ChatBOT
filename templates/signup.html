@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup</title>
+  <link rel="stylesheet" href="/static/styles/signup.css" />
+</head>
+<body>
+  <div class="login-container">
+    <img src="/static/img/msme.jpg" alt="MSME Logo" class="logo" />
+    <h2 style="color: red;">Create Your MSME ChatBOT Account</h2>
+
+    <input type="text" id="signup-username" placeholder="Enter Username" required />
+    <input type="email" id="email_id" placeholder="Email ID" required />
+    <input type="password" id="signup-password" placeholder="Enter Password" required />
+    <button onclick="signup()">Signup</button>
+
+    <p class="bottom-text">
+      Already have an account? <a href="login.html">Login here</a>
+    </p>
+  </div>
+
+  <!-- Link to external JS -->
+  <script src="/static/javascripts/signup.js"></script>
+</body>
+</html>
