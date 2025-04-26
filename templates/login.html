@@ -4,28 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/static/styles/login.css" />
 </head>
 <body>
   <div class="login-container">
-    <h2>🔐 Intelligence MSME ChatBOT Login</h2>
-      <link rel="stylesheet" href="/static/login.css"/>
+    <img src="/static/img/msme.jpg" alt="MSME Logo" class="logo" />
+    <h2 style="color: red;">🔐 Intelligence MSME ChatBOT Login</h2>
+
     <input type="text" id="username" placeholder="Username" required />
     <input type="password" id="password" placeholder="Password" required />
     <button onclick="login()">Login</button>
+
+    <p class="bottom-text">
+      Don't have an account? <a href="signup.html">Signup here</a>
+    </p>
   </div>
 
-  <script>
-    function login() {
-      const user = document.getElementById("username").value.trim();
-      const pass = document.getElementById("password").value.trim();
-      if (user && pass) {
-        localStorage.setItem("authenticated", "true");
-        window.location.href = "index.html";
-      } else {
-        alert("Please enter username and password.");
-      }
-    }
-  </script>
+  <!-- Link to external JS -->
+  <script src="/static/javascripts/login.js"></script>
 </body>
 </html>

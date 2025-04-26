@@ -1,26 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Intelligent Chatbot for MSMEs</title>
-  <link rel="stylesheet" href="/static/style.css"/>
+
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="/static/styles/chat.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- Link external JS at the bottom -->
+  <script src="/static/scripts/chat.js" defer></script>
 </head>
+
 <body>
-  <div class="chat-wrapper">
-    <header class="chat-header">
-      💬 <span class="title">Intelligent Chatbot for MSMEs</span>
-    </header>
 
-    <main id="chat-box" class="chat-box"></main>
+<section class="msger">
+  <header class="msger-header">
+    <div class="msger-header-title">
+      <img src="/static/img/msme.jpg" alt="MSME Logo" class="logo" style="width: 40px; height: auto; vertical-align: middle; margin-right: 10px;">
+      💬 Intelligent Chatbot for MSMEs
+    </div>
+  </header>
 
-    <footer class="input-group">
-      <input id="user-input" type="text" placeholder="Query your Database here..." />
-      <button id="mic-button">🎤</button>
-      <button id="send-button">➤</button>
-    </footer>
-  </div>
+  <main class="msger-chat" id="msger-chat">
+    <div class="msg left-msg">
+      <div class="msg-img" style="background-image: url('https://cdn-icons-png.flaticon.com/512/4712/4712105.png');"></div>
+      <div class="msg-bubble">
+        <div class="msg-info">
+          <div class="msg-info-name">ChatBot</div>
+          <div class="msg-info-time" id="chatbot-time"></div>
+        </div>
+        <div class="msg-text">
+          Hi, welcome to ChatBot! Go ahead and send me a message. 😄
+        </div>
+      </div>
+    </div>
+  </main>
 
-  <script src="script.js" defer></script>
+  <form class="msger-inputarea" id="msger-form">
+    <input type="text" class="msger-input" id="textInput" placeholder="Enter your message..." required>
+    <button type="submit" class="msger-send-btn">Send</button>
+  </form>
+</section>
+
 </body>
 </html>

@@ -1,0 +1,113 @@
+/* Reset some basic styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+}
+
+/* Wrapper */
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Login container */
+.login-container {
+  margin: auto;
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo */
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%; /* Circular Logo */
+}
+
+/* Heading */
+.login-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: red;
+  text-align: center;
+}
+
+/* Input fields */
+.login-container input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Button */
+.login-container button {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 18px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+  background-color: #2c3e90;
+}
+
+/* Bottom text (Signup link) */
+.bottom-text {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.bottom-text a {
+  color: #3f51b5;
+  text-decoration: none;
+}
+
+.bottom-text a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .login-container {
+    margin: 20px;
+    padding: 30px 20px;
+  }
+
+  .login-container h2 {
+    font-size: 20px;
+  }
+
+  .login-container input {
+    font-size: 14px;
+  }
+
+  .login-container button {
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+}
