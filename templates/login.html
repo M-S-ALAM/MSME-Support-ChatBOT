@@ -9,18 +9,22 @@
 <body>
   <div class="login-container">
     <img src="/static/img/msme.jpg" alt="MSME Logo" class="logo" />
-    <h2 style="color: red;">🔐 Intelligence MSME ChatBOT Login</h2>
+    <h2>🔐 Intelligence MSME ChatBOT Login</h2>
 
-    <input type="text" id="username" placeholder="Username" required />
-    <input type="password" id="password" placeholder="Password" required />
-    <button onclick="login()">Login</button>
+    <form id="loginForm" onsubmit="return login(event)">
+      <div class="form-fields">
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </div>
+      <div id="error-message" style="color: red; margin-top: 10px;"></div>
+    </form>
 
     <p class="bottom-text">
-      Don't have an account? <a href="signup.html">Signup here</a>
+      Don't have an account? <a href="/signup">Signup here</a>
     </p>
   </div>
 
-  <!-- Link to external JS -->
   <script src="/static/javascripts/login.js"></script>
 </body>
 </html>

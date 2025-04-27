@@ -9,15 +9,18 @@
 <body>
   <div class="login-container">
     <img src="/static/img/msme.jpg" alt="MSME Logo" class="logo" />
-    <h2 style="color: red;">Create Your MSME ChatBOT Account</h2>
-
-    <input type="text" id="signup-username" placeholder="Enter Username" required />
-    <input type="email" id="email_id" placeholder="Email ID" required />
-    <input type="password" id="signup-password" placeholder="Enter Password" required />
-    <button onclick="signup()">Signup</button>
-
+    <h2>Create Your MSME ChatBOT Account</h2>
+    <form id="signupForm" onsubmit="return signup(event)">
+      <div class="form-fields">
+        <input type="text" id="signup-username" placeholder="Enter Username" required />
+        <input type="email" id="email_id" placeholder="Email ID" required />
+        <input type="password" id="signup-password" placeholder="Enter Password" required />
+        <button type="submit">Signup</button>
+      </div>
+      <div id="signup-error-message" style="color: red; margin-top: 10px;"></div>
+    </form>
     <p class="bottom-text">
-      Already have an account? <a href="login.html">Login here</a>
+      Already have an account? <a href="/login">Login here</a>
     </p>
   </div>
 

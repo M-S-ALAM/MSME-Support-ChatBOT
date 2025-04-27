@@ -19,6 +19,43 @@ msgerForm.addEventListener("submit", function(event) {
   botResponse(msgText);
 });
 
+// Allow Enter key to send message (default for form submit), but prevent newline in input
+msgerInput.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    msgerForm.dispatchEvent(new Event('submit'));
+  }
+});
+
+// Add mic button support and send both text and audio to backend
+const micBtn = document.getElementById("mic-btn");
+
+if (micBtn && window.hasOwnProperty('webkitSpeechRecognition')) {
+  const recognition = new webkitSpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = "en-US";
+  micBtn.onclick = function() {
+    recognition.start();
+    micBtn.classList.add("listening");
+  };
+  recognition.onresult = function(event) {
+    const transcript = event.results[0][0].transcript;
+    msgerInput.value = transcript;
+    micBtn.classList.remove("listening");
+    msgerForm.dispatchEvent(new Event('submit'));
+  };
+  recognition.onerror = function() {
+    micBtn.classList.remove("listening");
+  };
+  recognition.onend = function() {
+    micBtn.classList.remove("listening");
+  };
+} else if (micBtn) {
+  micBtn.disabled = true;
+  micBtn.title = "Speech recognition not supported";
+}
+
 function appendMessage(name, img, side, text) {
   const msgHTML = `
     <div class="msg ${side}-msg">
@@ -32,15 +69,25 @@ function appendMessage(name, img, side, text) {
       </div>
     </div>
   `;
-
   msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-  msgerChat.scrollTop += 500;
+  msgerChat.scrollTop = msgerChat.scrollHeight;
 }
 
 function botResponse(rawText) {
-  $.get("/get", { msg: rawText }).done(function (data) {
-    appendMessage(BOT_NAME, BOT_IMG, "left", data);
-  });
+  fetch("/get", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ msg: rawText })
+  })
+    .then(response => response.json())
+    .then(data => {
+      appendMessage(BOT_NAME, BOT_IMG, "left", data.reply || data || "No response");
+    })
+    .catch(() => {
+      appendMessage(BOT_NAME, BOT_IMG, "left", "Sorry, there was an error.");
+    });
 }
 
 function formatDate(date) {
