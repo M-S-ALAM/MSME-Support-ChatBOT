@@ -1,4 +1,5 @@
-function login() {
+function login(event) {
+  if (event) event.preventDefault();
   const user = document.getElementById("username").value.trim();
   const pass = document.getElementById("password").value.trim();
   const validUser = "admin";
@@ -6,8 +7,12 @@ function login() {
 
   if (user === validUser && pass === validPass) {
     localStorage.setItem("authenticated", "true");
-    window.location.href = "chat.html";
+    // Use absolute path to ensure navigation works from any route
+    window.location.href = "/chat";
   } else {
-    alert("❌ Invalid username or password.");
+    const errorDiv = document.getElementById("error-message");
+    if (errorDiv) {
+      errorDiv.textContent = "❌ Invalid username or password.";
+    }
   }
 }
