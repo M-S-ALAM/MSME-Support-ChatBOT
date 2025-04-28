@@ -1,0 +1,740 @@
+2025-04-14 14:31:55,354 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-14 14:32:10,040 - sql_query_generation - INFO - Natural Language Query: tell me how many employees are there
+2025-04-14 14:32:10,873 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) as total_employees FROM Employee;
+2025-04-14 14:32:55,517 - sql_query_generation - INFO - Natural Language Query: can you give me name of them
+2025-04-14 14:32:56,337 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-14 14:33:18,035 - sql_query_generation - INFO - Natural Language Query: also provide some relevant information about them
+2025-04-14 14:33:18,662 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Employee;
+2025-04-14 14:33:44,874 - sql_query_generation - INFO - Natural Language Query: can you provide information about their department
+2025-04-14 14:33:45,683 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Department;
+2025-04-14 14:34:16,212 - sql_query_generation - INFO - Natural Language Query: can you provide information of employee with their  department
+2025-04-14 14:34:17,132 - sql_query_generation - INFO - Generated SQL Query: SELECT Employee.employee_id, Employee.employee_name, Employee.employee_position, Department.department_name
+FROM Employee
+JOIN Department ON Employee.department_id = Department.department_id;
+2025-04-16 10:45:33,452 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 10:45:38,283 - openai._base_client - INFO - Retrying request to /chat/completions in 0.476600 seconds
+2025-04-16 10:45:38,765 - openai._base_client - INFO - Retrying request to /chat/completions in 0.910490 seconds
+2025-04-16 11:34:25,859 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 11:34:28,870 - openai._base_client - INFO - Retrying request to /chat/completions in 0.443357 seconds
+2025-04-16 11:34:29,321 - openai._base_client - INFO - Retrying request to /chat/completions in 0.838186 seconds
+2025-04-16 11:41:02,578 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 11:51:36,536 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 11:53:16,566 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 11:54:09,529 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 11:54:41,077 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 11:59:10,506 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 11:59:23,938 - sql_query_generation - INFO - Natural Language Query: how many customers are there
+2025-04-16 11:59:24,622 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) AS total_customers FROM Customer;
+2025-04-16 12:02:55,069 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 12:08:31,527 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 12:12:51,750 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 12:12:55,475 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 12:13:04,564 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 12:13:05,678 - sql_query_generation - INFO - Natural Language Query: how many customer are there
+2025-04-16 12:13:06,409 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Customer;
+2025-04-16 12:13:17,480 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-16 12:13:18,491 - sql_query_generation - INFO - Natural Language Query: can you provide name of them
+2025-04-16 12:13:19,103 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-17 10:25:25,448 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-17 10:26:10,789 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-17 10:26:28,044 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-17 10:26:30,258 - sql_query_generation - INFO - Natural Language Query: how many customer are there
+2025-04-17 10:26:30,909 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Customer;
+2025-04-17 10:26:44,452 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-17 10:26:45,735 - sql_query_generation - INFO - Natural Language Query: can you give name of them
+2025-04-17 10:26:46,399 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-17 10:27:22,927 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-17 10:27:24,052 - sql_query_generation - INFO - Natural Language Query: can you give there name
+2025-04-17 10:27:24,695 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-17 10:27:35,902 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-17 10:27:36,985 - sql_query_generation - INFO - Natural Language Query: can you give their name
+2025-04-17 10:27:37,584 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-17 10:27:53,250 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-17 10:28:06,796 - sql_query_generation - INFO - Natural Language Query: how many customer in database
+2025-04-17 10:28:07,397 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-17 11:13:58,060 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-17 11:36:02,612 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 10:58:04,214 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 10:59:16,115 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 10:59:41,463 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-21 10:59:42,115 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-21 11:01:04,195 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:01:24,469 - sql_query_generation - INFO - Natural Language Query: how many employeess are there
+2025-04-21 11:01:25,081 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-21 11:01:34,911 - sql_query_generation - INFO - Natural Language Query: can you tell name of them
+2025-04-21 11:01:35,730 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-21 11:01:43,089 - sql_query_generation - INFO - Natural Language Query: and there mail id
+2025-04-21 11:01:43,714 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-21 11:01:58,664 - sql_query_generation - INFO - Natural Language Query: give there date of joining
+2025-04-21 11:01:59,471 - sql_query_generation - INFO - Generated SQL Query: SELECT start_of_project FROM Projects;
+2025-04-21 11:02:12,167 - sql_query_generation - INFO - Natural Language Query: joining date with their name
+2025-04-21 11:02:13,191 - sql_query_generation - INFO - Generated SQL Query: SELECT Employee.employee_name, Projects.start_of_project
+FROM Employee
+JOIN Projects ON Employee.employee_id = Projects.employee_id;
+2025-04-21 11:02:33,055 - sql_query_generation - INFO - Natural Language Query: with project end of date
+2025-04-21 11:02:33,874 - sql_query_generation - INFO - Generated SQL Query: SELECT project_name, end_of_project FROM Projects;
+2025-04-21 11:02:53,942 - sql_query_generation - INFO - Natural Language Query: also add start of project date
+2025-04-21 11:02:54,842 - sql_query_generation - INFO - Generated SQL Query: SELECT project_name, start_of_project FROM Projects;
+2025-04-21 11:03:57,163 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:04:52,454 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:06:05,153 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:06:17,703 - sql_query_generation - INFO - Natural Language Query: how are you
+2025-04-21 11:06:18,332 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-21 11:06:30,195 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-21 11:06:31,102 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-21 11:06:40,265 - sql_query_generation - INFO - Natural Language Query: can you give their name
+2025-04-21 11:06:41,050 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-21 11:06:54,984 - sql_query_generation - INFO - Natural Language Query: with project start date, and end date
+2025-04-21 11:06:55,651 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-21 11:07:11,367 - sql_query_generation - INFO - Natural Language Query: can you give their project start date
+2025-04-21 11:07:12,187 - sql_query_generation - INFO - Generated SQL Query: SELECT start_of_project FROM Projects;
+2025-04-21 11:07:19,195 - sql_query_generation - INFO - Natural Language Query: with their name
+2025-04-21 11:07:20,163 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-21 11:10:45,027 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:10:47,892 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:11:09,294 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:11:10,097 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-21 11:11:10,790 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-21 11:17:47,255 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:17:50,066 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:18:02,381 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:18:03,899 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-21 11:18:04,599 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-21 11:18:21,861 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:18:22,839 - sql_query_generation - INFO - Natural Language Query: can you give me name of that
+2025-04-21 11:18:26,312 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-21 11:18:39,253 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:18:40,326 - sql_query_generation - INFO - Natural Language Query: can you give me name of them
+2025-04-21 11:18:40,882 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-21 11:18:47,930 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 11:19:01,740 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-21 11:19:02,429 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS num_employees FROM Employee;
+2025-04-21 11:19:10,646 - sql_query_generation - INFO - Natural Language Query: give their name
+2025-04-21 11:19:11,258 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-21 11:40:48,766 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-21 12:31:11,540 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 10:00:39,107 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 10:01:02,838 - sql_query_generation - INFO - Natural Language Query: how many emplyees are there
+2025-04-22 10:01:03,493 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-22 10:01:27,467 - sql_query_generation - INFO - Natural Language Query: how many employee in database
+2025-04-22 10:01:28,214 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-22 10:01:46,430 - sql_query_generation - INFO - Natural Language Query: can you provide there names
+2025-04-22 10:01:47,250 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-22 10:02:13,047 - sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-04-22 10:02:13,866 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-22 10:02:58,479 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 10:03:01,693 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 10:03:19,780 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 10:03:21,006 - sql_query_generation - INFO - Natural Language Query: how many employee in database
+2025-04-22 10:03:21,697 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-22 10:03:35,098 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 10:03:36,275 - sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-04-22 10:03:36,892 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-22 10:05:46,039 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 10:06:25,195 - sql_query_generation - INFO - Natural Language Query: how many employees in database
+2025-04-22 10:06:26,470 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-22 10:06:39,432 - sql_query_generation - INFO - Natural Language Query: can you provide their nmaes
+2025-04-22 10:06:40,015 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-22 10:06:49,694 - sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-22 10:06:50,303 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-22 10:07:04,879 - sql_query_generation - INFO - Natural Language Query: also their date of joining
+2025-04-22 10:07:05,707 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name, created_at FROM Employee;
+2025-04-22 10:07:15,434 - sql_query_generation - INFO - Natural Language Query: also their date of join
+2025-04-22 10:07:16,196 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name, created_at FROM Employee;
+2025-04-22 10:08:16,635 - sql_query_generation - INFO - Natural Language Query: can you provide their project
+2025-04-22 10:08:17,407 - sql_query_generation - INFO - Generated SQL Query: SELECT project_name FROM Projects;
+2025-04-22 10:09:40,964 - sql_query_generation - INFO - Natural Language Query: can you provide their end of project and start of project date
+2025-04-22 10:09:41,770 - sql_query_generation - INFO - Generated SQL Query: SELECT start_of_project, end_of_project FROM Projects;
+2025-04-22 10:09:54,074 - sql_query_generation - INFO - Natural Language Query: with customer name and project
+2025-04-22 10:09:54,945 - sql_query_generation - INFO - Generated SQL Query: SELECT company_name, project_name
+FROM Customer
+JOIN Projects ON Customer.customer_id = Projects.customer_id;
+2025-04-22 10:22:25,757 - sql_query_generation - INFO - Natural Language Query: can you provide with end of join and end of join date
+2025-04-22 10:22:27,110 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-22 10:22:55,427 - sql_query_generation - INFO - Natural Language Query: can you provide with their end of join and end of join date
+2025-04-22 10:22:56,204 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-22 11:06:05,668 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 12:42:53,409 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 15:28:52,855 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 16:14:05,015 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-22 22:36:28,660 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 12:55:29,849 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 12:55:39,546 - sql_query_generation - INFO - Natural Language Query: what is the capital of france
+2025-04-23 12:55:40,230 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 12:55:55,182 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-23 12:55:56,000 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) as total_employees FROM Employee;
+2025-04-23 12:56:08,494 - sql_query_generation - INFO - Natural Language Query: provide there is
+2025-04-23 12:56:09,321 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 12:56:26,731 - sql_query_generation - INFO - Natural Language Query: provide their id
+2025-04-23 12:56:27,539 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_id FROM Employee;
+2025-04-23 13:10:14,410 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 13:10:55,700 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 13:11:11,996 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 13:13:06,302 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 13:13:39,328 - sql_query_generation - INFO - Natural Language Query: what is the capital of india
+2025-04-23 13:13:40,043 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 13:16:43,793 - sql_query_generation - INFO - Natural Language Query: how many employes are there
+2025-04-23 13:16:47,902 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 13:20:12,489 - sql_query_generation - INFO - Natural Language Query: how many employees
+2025-04-23 13:20:13,523 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-23 13:20:30,200 - sql_query_generation - INFO - Natural Language Query: provide there id
+2025-04-23 13:20:31,033 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_id FROM Employee;
+2025-04-23 13:20:44,654 - sql_query_generation - INFO - Natural Language Query: there name and mail id
+2025-04-23 13:20:45,473 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name, mail_id FROM Employee;
+2025-04-23 13:21:02,065 - sql_query_generation - INFO - Natural Language Query: provide there name
+2025-04-23 13:21:02,977 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 13:21:27,658 - sql_query_generation - INFO - Natural Language Query: also date of join
+2025-04-23 13:21:28,486 - sql_query_generation - INFO - Generated SQL Query: SELECT join_date FROM Employee;
+2025-04-23 13:28:17,906 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 13:28:38,577 - sql_query_generation - INFO - Natural Language Query: how many employee are their
+2025-04-23 13:28:39,201 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-23 13:28:50,456 - sql_query_generation - INFO - Natural Language Query: provide name
+2025-04-23 13:28:51,285 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 13:29:02,539 - sql_query_generation - INFO - Natural Language Query: provide their name
+2025-04-23 13:29:03,564 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 13:29:14,532 - sql_query_generation - INFO - Natural Language Query: also their mail id
+2025-04-23 13:29:15,394 - sql_query_generation - INFO - Generated SQL Query: SELECT email FROM Employee;
+2025-04-23 13:29:44,130 - sql_query_generation - INFO - Natural Language Query: there related dates
+2025-04-23 13:29:44,935 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 13:42:42,514 - sql_query_generation - INFO - Natural Language Query: give their relevant information about them
+2025-04-23 13:42:43,947 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Employee;
+2025-04-23 13:43:08,525 - sql_query_generation - INFO - Natural Language Query: how many different deparment are there
+2025-04-23 13:43:09,547 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(DISTINCT department_id) AS total_departments FROM Department;
+2025-04-23 13:43:22,872 - sql_query_generation - INFO - Natural Language Query: can you provide count of that
+2025-04-23 13:43:23,677 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Customer;
+2025-04-23 13:43:39,869 - sql_query_generation - INFO - Natural Language Query: can you provide count of department
+2025-04-23 13:43:40,883 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(DISTINCT department_id) AS department_count FROM Department;
+2025-04-23 13:44:03,718 - sql_query_generation - INFO - Natural Language Query: how many employee in each dep
+2025-04-23 13:44:04,649 - sql_query_generation - INFO - Generated SQL Query: SELECT department_id, COUNT(employee_id) AS employee_count
+FROM Employee
+GROUP BY department_id;
+2025-04-23 13:44:23,685 - sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-23 13:44:24,517 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 13:44:33,310 - sql_query_generation - INFO - Natural Language Query: with departmnet
+2025-04-23 13:44:34,041 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 13:44:48,068 - sql_query_generation - INFO - Natural Language Query: with their department
+2025-04-23 13:44:48,977 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Employee;
+2025-04-23 13:45:22,894 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 13:45:29,078 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 13:45:45,721 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 13:45:47,050 - sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-04-23 13:45:47,869 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-23 13:47:18,452 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 13:47:19,622 - sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-23 13:47:20,232 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 14:05:12,360 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:05:15,716 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:05:26,575 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:05:27,534 - sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-04-23 14:05:28,354 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-23 14:05:38,084 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:05:39,039 - sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-23 14:05:39,812 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 14:18:36,203 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:18:39,126 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:18:47,815 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:18:49,346 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-23 14:18:50,166 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-23 14:18:58,256 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:18:59,277 - sql_query_generation - INFO - Natural Language Query: can you provide there names
+2025-04-23 14:18:59,942 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 14:20:56,925 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:20:58,156 - sql_query_generation - INFO - Natural Language Query: how many different department are there
+2025-04-23 14:20:58,973 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(DISTINCT department_id) FROM Department;
+2025-04-23 14:26:02,524 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 14:26:19,281 - sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-04-23 14:26:20,014 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-23 14:26:29,842 - sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-04-23 14:26:30,509 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 14:26:47,547 - sql_query_generation - INFO - Natural Language Query: also provide there department
+2025-04-23 14:26:48,777 - sql_query_generation - INFO - Generated SQL Query: SELECT department_id, department_name 
+FROM Department 
+WHERE manager_id IN (SELECT employee_id FROM Employee WHERE employee_name = 'there');
+2025-04-23 14:27:04,763 - sql_query_generation - INFO - Natural Language Query: with there department
+2025-04-23 14:27:05,980 - sql_query_generation - INFO - Generated SQL Query: SELECT department_id, department_name 
+FROM Department 
+WHERE manager_id IN (SELECT employee_id FROM Employee WHERE employee_name = 'there');
+2025-04-23 14:27:38,146 - sql_query_generation - INFO - Natural Language Query: also provide some relevant information about them
+2025-04-23 14:27:39,374 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name, employee_position, department_id
+FROM Employee;
+2025-04-23 14:27:58,010 - sql_query_generation - INFO - Natural Language Query: is there is date relate data for them
+2025-04-23 14:27:59,228 - sql_query_generation - INFO - Generated SQL Query: SELECT issue_date, due_date FROM Invoice;
+2025-04-23 14:28:35,488 - sql_query_generation - INFO - Natural Language Query: can you provide date related data, name and employee_position
+2025-04-23 14:28:36,515 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name, employee_position, issue_date, due_date
+FROM Employee
+JOIN Invoice ON Employee.employee_id = Invoice.customer_id;
+2025-04-23 14:29:06,403 - sql_query_generation - INFO - Natural Language Query: how many different types of department and how many employees in each department
+2025-04-23 14:29:07,443 - sql_query_generation - INFO - Generated SQL Query: SELECT department_name, COUNT(employee_id) AS employee_count
+FROM Department
+LEFT JOIN Employee ON Department.department_id = Employee.department_id
+GROUP BY department_name;
+2025-04-23 17:48:27,962 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 17:48:41,080 - sql_query_generation - INFO - Natural Language Query: how many customers are there
+2025-04-23 17:48:41,912 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Customer;
+2025-04-23 17:48:54,285 - sql_query_generation - INFO - Natural Language Query: can you give me details about them
+2025-04-23 17:48:55,029 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 17:49:25,238 - sql_query_generation - INFO - Natural Language Query: can you give me details about those customer
+2025-04-23 17:49:25,880 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Customer;
+2025-04-23 17:50:02,617 - sql_query_generation - INFO - Natural Language Query: some details about their dates
+2025-04-23 17:50:03,643 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Customer;
+2025-04-23 17:55:00,126 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 17:55:03,456 - sql_query_generation - INFO - Natural Language Query: gyandata
+2025-04-23 17:55:04,082 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 17:55:17,702 - sql_query_generation - INFO - Natural Language Query: can you give me detail of customer
+2025-04-23 17:55:18,398 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Customer;
+2025-04-23 17:55:46,274 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 17:58:02,039 - sql_query_generation - INFO - Natural Language Query: can you give deatils about customer
+2025-04-23 17:58:02,861 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Customer;
+2025-04-23 17:59:03,862 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 17:59:19,159 - sql_query_generation - INFO - Natural Language Query: can you give me details of customer
+2025-04-23 17:59:19,880 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Customer;
+2025-04-23 18:00:34,851 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 18:00:37,948 - sql_query_generation - INFO - Natural Language Query: can you give me details of customer
+2025-04-23 18:00:38,818 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Customer;
+2025-04-23 18:01:18,257 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 18:01:21,940 - sql_query_generation - INFO - Natural Language Query: can you give me details of customer
+2025-04-23 18:01:22,755 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Customer;
+2025-04-23 18:02:03,955 - sql_query_generation - INFO - Natural Language Query: how many different types of department are there with their person count
+2025-04-23 18:02:04,844 - sql_query_generation - INFO - Generated SQL Query: SELECT department_name, COUNT(manager_id) AS person_count FROM Department GROUP BY department_name;
+2025-04-23 18:08:43,424 - sql_query_generation - INFO - Natural Language Query: Which projects have the most hours logged in the current month?
+2025-04-23 18:08:45,284 - sql_query_generation - INFO - Generated SQL Query: SELECT project_id, SUM(hours) AS total_hours
+FROM TimeEntry
+WHERE strftime('%Y-%m', date) = strftime('%Y-%m', 'now')
+GROUP BY project_id
+ORDER BY total_hours DESC
+LIMIT 1;
+2025-04-23 18:09:02,036 - sql_query_generation - INFO - Natural Language Query: ist all projects where the start date is after 2020
+2025-04-23 18:09:03,193 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Projects WHERE start_of_project > '2020-01-01';
+2025-04-23 18:09:19,897 - sql_query_generation - INFO - Natural Language Query: how many projects is handled by each employee
+2025-04-23 18:09:20,821 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_id, COUNT(DISTINCT project_id) AS project_count
+FROM Projects
+GROUP BY employee_id;
+2025-04-23 18:09:33,204 - sql_query_generation - INFO - Natural Language Query: with employee name
+2025-04-23 18:09:34,125 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 18:09:50,072 - sql_query_generation - INFO - Natural Language Query: how many projects is handled by each employee with their name
+2025-04-23 18:09:51,345 - sql_query_generation - INFO - Generated SQL Query: SELECT Employee.employee_name, COUNT(DISTINCT Projects.project_id) AS project_count
+FROM Employee
+LEFT JOIN Projects ON Employee.employee_id = Projects.employee_id
+GROUP BY Employee.employee_id;
+2025-04-23 18:10:07,527 - sql_query_generation - INFO - Natural Language Query: find the average payment amount per payment method
+2025-04-23 18:10:08,902 - sql_query_generation - INFO - Generated SQL Query: SELECT payment_method, AVG(amount) AS average_payment_amount
+FROM Payment
+GROUP BY payment_method;
+2025-04-23 18:17:28,208 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 18:17:39,265 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-23 18:17:39,978 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-23 18:17:51,437 - sql_query_generation - INFO - Natural Language Query: can you give me their setails
+2025-04-23 18:17:52,151 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Employee;
+2025-04-23 18:19:59,388 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 18:20:10,961 - sql_query_generation - INFO - Natural Language Query: How many employes are there
+2025-04-23 18:20:11,872 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-23 18:20:22,675 - sql_query_generation - INFO - Natural Language Query: can you give me their setails
+2025-04-23 18:20:23,343 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 18:20:31,444 - sql_query_generation - INFO - Natural Language Query: can you give me their details
+2025-04-23 18:20:32,164 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Employee;
+2025-04-23 18:21:25,398 - sql_query_generation - INFO - Natural Language Query: ind the average payment amount per payment method
+2025-04-23 18:21:26,438 - sql_query_generation - INFO - Generated SQL Query: SELECT payment_method, AVG(amount) AS average_payment_amount
+FROM Payment
+GROUP BY payment_method;
+2025-04-23 18:48:22,451 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 18:48:35,858 - sql_query_generation - INFO - Natural Language Query: list all projects where the start date is after 2020
+2025-04-23 18:48:36,905 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Projects WHERE start_of_project > '2020-01-01';
+2025-04-23 19:02:35,040 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 19:02:38,251 - sql_query_generation - INFO - Natural Language Query: list all projects where the start date is after 2020
+2025-04-23 19:02:39,274 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Projects WHERE start_of_project > '2020-01-01';
+2025-04-23 19:03:17,522 - sql_query_generation - INFO - Natural Language Query: List all overdue invoices. 
+2025-04-23 19:03:18,993 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Invoice WHERE status = 'OVERDUE';
+2025-04-23 19:03:41,638 - sql_query_generation - INFO - Natural Language Query: How many customers are in each sector?
+2025-04-23 19:03:43,121 - sql_query_generation - INFO - Generated SQL Query: SELECT sector, COUNT(customer_id) AS customer_count
+FROM Customer
+GROUP BY sector;
+2025-04-23 19:04:23,319 - sql_query_generation - INFO - Natural Language Query: find the average payment amount per payment method
+
+2025-04-23 19:04:24,328 - sql_query_generation - INFO - Generated SQL Query: SELECT payment_method, AVG(amount) AS average_payment_amount
+FROM Payment
+GROUP BY payment_method;
+2025-04-23 19:07:19,575 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 19:07:23,546 - sql_query_generation - INFO - Natural Language Query: How many customers are in each sector?
+2025-04-23 19:07:24,358 - sql_query_generation - INFO - Generated SQL Query: SELECT sector, COUNT(*) AS customer_count
+FROM Customer
+GROUP BY sector;
+2025-04-23 19:08:53,782 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 19:08:59,806 - sql_query_generation - INFO - Natural Language Query: How many customers are in each sector?
+2025-04-23 19:09:00,625 - sql_query_generation - INFO - Generated SQL Query: SELECT sector, COUNT(customer_id) AS customer_count
+FROM Customer
+GROUP BY sector;
+2025-04-23 19:10:08,091 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 19:10:11,487 - sql_query_generation - INFO - Natural Language Query: How many customers are in each sector?
+2025-04-23 19:10:12,327 - sql_query_generation - INFO - Generated SQL Query: SELECT sector, COUNT(customer_id) AS customer_count
+FROM Customer
+GROUP BY sector;
+2025-04-23 19:16:19,489 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 19:16:32,206 - sql_query_generation - INFO - Natural Language Query: what is the capital of India
+2025-04-23 19:16:32,833 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 19:16:43,904 - sql_query_generation - INFO - Natural Language Query: how many customer in database
+2025-04-23 19:16:44,904 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) AS total_customers FROM Customer;
+2025-04-23 19:17:00,069 - sql_query_generation - INFO - Natural Language Query: can you give some more information about them
+2025-04-23 19:17:00,889 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:25:25,301 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 20:25:43,718 - sql_query_generation - INFO - Natural Language Query: what is the capital of france
+2025-04-23 20:25:44,386 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:25:54,617 - sql_query_generation - INFO - Natural Language Query: how many employes are there
+2025-04-23 20:25:55,392 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-23 20:26:05,438 - sql_query_generation - INFO - Natural Language Query: can you provide details about them
+2025-04-23 20:26:06,246 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:27:42,197 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 20:27:57,565 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-23 20:27:58,477 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-23 20:28:07,661 - sql_query_generation - INFO - Natural Language Query: can you provide there name
+2025-04-23 20:28:08,305 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:28:21,733 - sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-04-23 20:28:22,345 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 20:32:11,644 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 20:32:28,621 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-23 20:32:29,633 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-23 20:32:41,508 - sql_query_generation - INFO - Natural Language Query: can you tell name of them
+2025-04-23 20:32:42,235 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:33:02,407 - sql_query_generation - INFO - Natural Language Query: can you provide there name
+2025-04-23 20:33:03,217 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:33:12,444 - sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-23 20:33:13,264 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 20:35:11,217 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 20:35:25,156 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-23 20:35:26,180 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-23 20:35:38,055 - sql_query_generation - INFO - Natural Language Query: can you provide there names
+2025-04-23 20:35:38,647 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:35:50,387 - sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-23 20:35:51,267 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:36:08,356 - sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-04-23 20:36:08,970 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:36:18,935 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 20:36:29,680 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-23 20:36:30,681 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-23 20:36:40,347 - sql_query_generation - INFO - Natural Language Query: ccan you provide their name
+2025-04-23 20:36:41,124 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:37:01,581 - sql_query_generation - INFO - Natural Language Query: can you provide there names
+2025-04-23 20:37:02,231 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:37:21,380 - sql_query_generation - INFO - Natural Language Query: can you provide customer names
+2025-04-23 20:37:22,199 - sql_query_generation - INFO - Generated SQL Query: SELECT company_name AS customer_names FROM Customer;
+2025-04-23 20:38:05,719 - sql_query_generation - INFO - Natural Language Query: also provide some more information about them
+2025-04-23 20:38:06,535 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:38:28,923 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 20:39:34,168 - sql_query_generation - INFO - Natural Language Query: \
+2025-04-23 20:39:35,420 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:39:46,891 - sql_query_generation - INFO - Natural Language Query: hhow many employees are there
+2025-04-23 20:39:47,504 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-23 20:39:55,084 - sql_query_generation - INFO - Natural Language Query: provide their names
+2025-04-23 20:39:55,695 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 20:40:11,044 - sql_query_generation - INFO - Natural Language Query: also some relevant information about them
+2025-04-23 20:40:11,875 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_id, employee_name, employee_position, department_id FROM Employee;
+2025-04-23 20:40:39,627 - sql_query_generation - INFO - Natural Language Query: can you also provide date related information about them
+2025-04-23 20:40:40,945 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_id, employee_name, start_of_project, end_of_project
+FROM Employee
+JOIN Projects ON Employee.employee_id = Projects.employee_id;
+2025-04-23 20:41:10,276 - sql_query_generation - INFO - Natural Language Query: can you provide date related information about customer
+2025-04-23 20:41:11,460 - sql_query_generation - INFO - Generated SQL Query: SELECT customer_id, company_name, sector, start_of_project, end_of_project
+FROM Customer
+JOIN Projects ON Customer.customer_id = Projects.customer_id;
+2025-04-23 20:41:38,194 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 20:41:52,421 - sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-04-23 20:41:53,241 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) FROM Employee;
+2025-04-23 20:42:07,280 - sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-04-23 20:42:08,002 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 20:42:35,444 - sql_query_generation - INFO - Natural Language Query: can you also provide some relevant information about them
+2025-04-23 20:42:36,156 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:42:56,636 - sql_query_generation - INFO - Natural Language Query: can you also provide some relevant information about customer
+2025-04-23 20:42:57,304 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Customer;
+2025-04-23 20:43:21,136 - sql_query_generation - INFO - Natural Language Query: also some information related to date
+2025-04-23 20:43:22,236 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:45:23,739 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 20:45:42,117 - sql_query_generation - INFO - Natural Language Query: what is the capital of france
+2025-04-23 20:45:42,823 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:45:50,265 - sql_query_generation - INFO - Natural Language Query: what is the value of 1 + 1
+2025-04-23 20:45:50,953 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:46:04,940 - sql_query_generation - INFO - Natural Language Query: how many employees are there in database
+2025-04-23 20:46:05,601 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) FROM Employee;
+2025-04-23 20:46:16,421 - sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-04-23 20:46:17,228 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 20:46:30,821 - sql_query_generation - INFO - Natural Language Query: also more more information about them
+2025-04-23 20:46:31,781 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:47:10,144 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 20:50:47,995 - sql_query_generation - INFO - Natural Language Query: what is the capital of france
+2025-04-23 20:50:49,012 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:51:06,613 - sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-04-23 20:51:07,443 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-23 20:51:19,822 - sql_query_generation - INFO - Natural Language Query: can you provide information about them
+2025-04-23 20:51:20,459 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:51:29,307 - sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-23 20:51:29,970 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-23 20:51:40,836 - sql_query_generation - INFO - Natural Language Query: also some more information
+2025-04-23 20:51:41,647 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 20:51:55,572 - sql_query_generation - INFO - Natural Language Query: also some more information about customer
+2025-04-23 20:51:56,598 - sql_query_generation - INFO - Generated SQL Query: SELECT * FROM Customer;
+2025-04-23 20:52:21,581 - sql_query_generation - INFO - Natural Language Query: how many types of department are there
+2025-04-23 20:52:22,604 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(DISTINCT department_name) AS num_types_of_department FROM Department;
+2025-04-23 20:52:38,271 - sql_query_generation - INFO - Natural Language Query: how many person in each section
+2025-04-23 20:52:39,387 - sql_query_generation - INFO - Generated SQL Query: SELECT sector, COUNT(employee_id) AS total_person
+FROM Employee
+GROUP BY sector;
+2025-04-23 20:52:50,035 - sql_query_generation - INFO - Natural Language Query: how many person in each department
+2025-04-23 20:52:51,265 - sql_query_generation - INFO - Generated SQL Query: SELECT department_id, department_name, COUNT(employee_id) AS number_of_employees
+FROM Employee
+GROUP BY department_id, department_name;
+2025-04-23 20:53:07,047 - sql_query_generation - INFO - Natural Language Query: How many customers are in each sector?
+2025-04-23 20:53:07,919 - sql_query_generation - INFO - Generated SQL Query: SELECT sector, COUNT(customer_id) AS customer_count
+FROM Customer
+GROUP BY sector;
+2025-04-23 20:53:25,659 - sql_query_generation - INFO - Natural Language Query: List all overdue invoices. 
+2025-04-23 20:53:26,503 - sql_query_generation - INFO - Generated SQL Query: SELECT * 
+FROM Invoice 
+WHERE status = 'OVERDUE'
+2025-04-23 20:55:28,467 - sql_query_generation - INFO - Natural Language Query: find the average payment amount per payment method
+2025-04-23 20:55:29,495 - sql_query_generation - INFO - Generated SQL Query: SELECT payment_method, AVG(amount) AS avg_payment_amount
+FROM Payment
+GROUP BY payment_method;
+2025-04-23 20:55:59,291 - sql_query_generation - INFO - Natural Language Query: how many projects is handled by each employee
+2025-04-23 20:56:00,716 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_id, employee_name, COUNT(project_id) AS number_of_projects
+FROM Projects
+GROUP BY employee_id, employee_name;
+2025-04-23 20:56:12,915 - sql_query_generation - INFO - Natural Language Query: how many projects is handled by each employe
+2025-04-23 20:56:14,042 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_id, COUNT(project_id) AS total_projects_handled
+FROM Projects
+GROUP BY employee_id;
+2025-04-23 20:56:29,399 - sql_query_generation - INFO - Natural Language Query: list all projects where the start date is after 2020
+
+2025-04-23 20:56:30,618 - sql_query_generation - INFO - Generated SQL Query: SELECT * 
+FROM Projects 
+WHERE start_of_project > '2020-01-01';
+2025-04-23 21:33:24,290 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 21:33:24,402 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-23 21:33:24,402 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-23 21:33:24,410 - werkzeug - INFO -  * Restarting with watchdog (inotify)
+2025-04-23 21:33:27,844 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 21:33:28,146 - werkzeug - WARNING -  * Debugger is active!
+2025-04-23 21:33:28,155 - werkzeug - INFO -  * Debugger PIN: 763-296-703
+2025-04-23 21:33:50,547 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:33:50] "GET / HTTP/1.1" 200 -
+2025-04-23 21:33:50,600 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:33:50] "GET /static/style.css HTTP/1.1" 200 -
+2025-04-23 21:33:50,692 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:33:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-23 21:35:17,253 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:35:17] "POST /chat HTTP/1.1" 200 -
+2025-04-23 21:35:31,177 - sql_query_generation - INFO - Natural Language Query: what is the capital of france
+2025-04-23 21:35:31,949 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 21:35:31,951 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:35:31] "POST /chat HTTP/1.1" 200 -
+2025-04-23 21:35:44,956 - sql_query_generation - INFO - Natural Language Query: how many employee in database
+2025-04-23 21:35:45,726 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-23 21:35:46,497 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:35:46] "POST /chat HTTP/1.1" 200 -
+2025-04-23 21:35:55,635 - sql_query_generation - INFO - Natural Language Query: can you provide there name
+2025-04-23 21:35:56,404 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 21:35:56,405 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:35:56] "POST /chat HTTP/1.1" 200 -
+2025-04-23 21:36:10,185 - sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-23 21:36:10,774 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 21:36:10,792 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:36:10] "POST /chat HTTP/1.1" 200 -
+2025-04-23 21:39:03,197 - sql_query_generation - INFO - Natural Language Query: what your name
+2025-04-23 21:39:03,958 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 21:39:03,960 - werkzeug - INFO - 127.0.0.1 - - [23/Apr/2025 21:39:03] "POST /chat HTTP/1.1" 200 -
+2025-04-23 21:46:17,350 - werkzeug - INFO -  * Detected change in '/home/shahbaz/Project/ChatBOT_Walmart/flask_app.py', reloading
+2025-04-23 21:46:17,352 - werkzeug - INFO -  * Detected change in '/home/shahbaz/Project/ChatBOT_Walmart/flask_app.py', reloading
+2025-04-23 21:46:17,355 - werkzeug - INFO -  * Detected change in '/home/shahbaz/Project/ChatBOT_Walmart/flask_app.py', reloading
+2025-04-23 21:46:18,499 - werkzeug - INFO -  * Restarting with watchdog (inotify)
+2025-04-23 21:47:38,409 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-23 21:48:13,589 - sql_query_generation - INFO - Natural Language Query: what is capital of france
+2025-04-23 21:48:14,196 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 21:48:27,902 - sql_query_generation - INFO - Natural Language Query: how many customer are in database
+2025-04-23 21:48:28,878 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) AS total_customers FROM Customer;
+2025-04-23 21:48:41,791 - sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-23 21:48:42,671 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-23 22:13:39,847 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-24 14:01:15,271 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-24 18:39:08,496 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-24 18:39:32,868 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-24 18:39:33,789 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-24 18:39:51,403 - sql_query_generation - INFO - Natural Language Query: can you provided their names
+2025-04-24 18:39:52,118 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-24 18:48:15,901 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-24 18:48:56,505 - sql_query_generation - INFO - Natural Language Query: what is capital of India
+2025-04-24 18:48:57,079 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-25 15:40:46,263 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-25 15:41:10,851 - sql_query_generation - INFO - Natural Language Query: how many customer are there
+2025-04-25 15:41:14,616 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) AS total_customers FROM Customer;
+2025-04-25 15:41:32,849 - openai._base_client - INFO - Retrying request to /chat/completions in 0.443167 seconds
+2025-04-25 15:41:46,932 - sql_query_generation - INFO - Natural Language Query: can you provide there name
+2025-04-25 15:41:50,279 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-25 15:50:34,146 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-25 15:51:33,490 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-25 15:55:35,205 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-25 15:56:56,882 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-25 17:35:05,977 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-25 17:37:33,465 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-25 17:39:59,626 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-25 22:22:51,192 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-25 22:23:10,675 - sql_query_generation - INFO - Natural Language Query: how many customers are there
+2025-04-25 22:23:11,699 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Customer;
+2025-04-26 13:44:59,808 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 13:44:59,945 - fastapi - ERROR - Form data requires "python-multipart" to be installed. 
+You can install "python-multipart" with: 
+
+pip install python-multipart
+
+2025-04-26 13:45:52,762 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 13:49:11,064 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 13:49:26,897 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 13:50:01,410 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 13:50:19,098 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 13:56:59,748 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 14:01:52,596 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 14:03:58,641 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 14:12:21,433 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 14:12:36,370 - sql_query_generation - INFO - Natural Language Query: what is the capital of france
+2025-04-26 14:12:36,984 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 14:12:46,405 - sql_query_generation - INFO - Natural Language Query: what is the value of 2 +9
+2025-04-26 14:12:47,019 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 14:12:58,802 - sql_query_generation - INFO - Natural Language Query: how many customer are there
+2025-04-26 14:12:59,513 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) 
+FROM Customer;
+2025-04-26 14:13:09,650 - sql_query_generation - INFO - Natural Language Query: can you provided their names
+2025-04-26 14:13:10,673 - sql_query_generation - INFO - Generated SQL Query: SELECT company_name
+FROM Customer;
+2025-04-26 14:13:23,545 - sql_query_generation - INFO - Natural Language Query: and their mail address
+2025-04-26 14:13:24,293 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 14:13:35,147 - sql_query_generation - INFO - Natural Language Query: some more information about them
+2025-04-26 14:13:35,864 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 14:14:08,735 - sql_query_generation - INFO - Natural Language Query: how many different types of sector are there
+2025-04-26 14:14:09,452 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(DISTINCT sector) AS sector_count FROM Customer;
+2025-04-26 14:14:21,979 - sql_query_generation - INFO - Natural Language Query: and number of candidate in each sector
+2025-04-26 14:14:22,763 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 14:14:36,793 - sql_query_generation - INFO - Natural Language Query: and number of customer in each sector
+2025-04-26 14:14:37,817 - sql_query_generation - INFO - Generated SQL Query: SELECT sector, COUNT(customer_id) AS number_of_customers
+FROM Customer
+GROUP BY sector;
+2025-04-26 14:17:24,847 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:31:00,702 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:31:10,565 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:31:31,497 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:38:40,689 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:39:36,414 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:46:22,083 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:51:04,205 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:51:04,787 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:51:06,628 - sql_query_generation - INFO - Natural Language Query: hi
+2025-04-26 15:51:07,981 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 15:51:59,468 - sql_query_generation - INFO - Natural Language Query: how many customer are there
+2025-04-26 15:52:00,304 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) AS customer_count FROM Customer;
+2025-04-26 15:52:34,905 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:52:35,136 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:58:31,367 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:59:26,188 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 15:59:26,794 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:00:19,664 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:03:22,058 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:05:31,406 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:05:31,666 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:05:45,988 - sql_query_generation - INFO - Natural Language Query: how many employes are there
+2025-04-26 16:05:46,705 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-26 16:06:08,004 - sql_query_generation - INFO - Natural Language Query: can you provide there name
+2025-04-26 16:06:08,619 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 16:07:34,368 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:07:35,031 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:07:46,413 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:08:09,729 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:08:10,308 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:08:24,168 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-26 16:08:25,027 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Employee;
+2025-04-26 16:08:34,037 - sql_query_generation - INFO - Natural Language Query: can you provided there names
+2025-04-26 16:08:34,960 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name
+FROM Employee;
+2025-04-26 16:08:56,699 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:10:27,432 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:10:27,459 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:11:59,918 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:12:00,048 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:12:00,119 - sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-26 16:12:21,066 - sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-04-26 16:12:22,398 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) FROM Employee;
+2025-04-26 16:12:35,912 - sql_query_generation - INFO - Natural Language Query: can you provide there name
+2025-04-26 16:12:36,496 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 16:12:52,009 - sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-04-26 16:12:52,605 - sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-04-26 16:13:09,501 - sql_query_generation - INFO - Natural Language Query: in table format
+2025-04-26 16:13:10,220 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 16:13:29,265 - sql_query_generation - INFO - Natural Language Query: also provide some relevant information about them
+2025-04-26 16:13:30,186 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 16:13:53,018 - sql_query_generation - INFO - Natural Language Query: can many different types of department are there
+2025-04-26 16:13:53,839 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(DISTINCT department_name) AS num_departments FROM Department;
+2025-04-26 16:14:13,190 - sql_query_generation - INFO - Natural Language Query: how many employees in each departm
+2025-04-26 16:14:13,814 - sql_query_generation - INFO - Generated SQL Query: None
+2025-04-26 16:14:24,129 - sql_query_generation - INFO - Natural Language Query: how many employees in each department
+2025-04-26 16:14:24,972 - sql_query_generation - INFO - Generated SQL Query: SELECT department_id, COUNT(employee_id) AS employee_count
+FROM Employee
+GROUP BY department_id;
+2025-04-27 15:17:14,558 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 15:17:40,540 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 15:17:52,136 - src.codes.sql_query_generation - INFO - Natural Language Query: how many customer are there
+2025-04-27 15:17:52,814 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) AS total_customers FROM Customer;
+2025-04-27 15:18:10,032 - src.codes.sql_query_generation - INFO - Natural Language Query: how many customeres are their
+2025-04-27 15:18:11,337 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) FROM Customer;
+2025-04-27 15:18:30,534 - src.codes.sql_query_generation - INFO - Natural Language Query: how many customer are in database
+2025-04-27 15:18:31,245 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) as total_customers FROM Customer;
+2025-04-27 15:18:50,398 - src.codes.sql_query_generation - INFO - Natural Language Query: how many different department are there
+2025-04-27 15:18:51,230 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(DISTINCT department_id) AS department_count
+FROM Department;
+2025-04-27 15:23:20,267 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 15:23:32,662 - src.codes.sql_query_generation - INFO - Natural Language Query: how many customer are there
+2025-04-27 15:23:33,335 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) AS total_customers FROM Customer;
+2025-04-27 15:25:12,479 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 15:25:28,261 - src.codes.sql_query_generation - INFO - Natural Language Query: how many customer are in database
+2025-04-27 15:25:28,900 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) FROM Customer;
+2025-04-27 15:25:42,810 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provide there name
+2025-04-27 15:25:51,659 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-04-27 15:28:15,314 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 15:28:55,213 - src.codes.sql_query_generation - INFO - Natural Language Query: how many customer are in database
+2025-04-27 15:28:55,836 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) AS total_customers FROM Customer;
+2025-04-27 15:29:09,524 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provide there name
+2025-04-27 15:29:10,152 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-04-27 15:35:40,501 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provide me name of customer
+2025-04-27 15:35:41,321 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT company_name 
+FROM Customer;
+2025-04-27 15:36:13,419 - src.codes.sql_query_generation - INFO - Natural Language Query: also some more information about them
+2025-04-27 15:36:14,022 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-04-27 15:36:41,033 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provide name of customer
+2025-04-27 15:36:41,720 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT company_name 
+FROM Customer;
+2025-04-27 15:37:11,643 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-04-27 15:37:12,352 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT company_name
+FROM Customer;
+2025-04-27 18:10:26,808 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:05:03,697 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:05:03,700 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:05:08,329 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:07:00,496 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:07:00,540 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:20:11,834 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:20:12,055 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:31:48,236 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:31:48,284 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:48:30,729 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 19:48:30,772 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 23:11:43,130 - openai._base_client - INFO - Retrying request to /chat/completions in 0.407996 seconds
+2025-04-27 23:11:43,544 - openai._base_client - INFO - Retrying request to /chat/completions in 0.766288 seconds
+2025-04-27 23:12:00,854 - openai._base_client - INFO - Retrying request to /chat/completions in 0.437724 seconds
+2025-04-27 23:12:01,296 - openai._base_client - INFO - Retrying request to /chat/completions in 0.911616 seconds
+2025-04-27 23:13:19,199 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 23:13:37,252 - openai._base_client - INFO - Retrying request to /chat/completions in 0.431219 seconds
+2025-04-27 23:13:37,688 - openai._base_client - INFO - Retrying request to /chat/completions in 0.771919 seconds
+2025-04-27 23:15:57,910 - openai._base_client - INFO - Retrying request to /chat/completions in 0.458694 seconds
+2025-04-27 23:15:58,375 - openai._base_client - INFO - Retrying request to /chat/completions in 0.970451 seconds
+2025-04-27 23:17:04,487 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 23:17:11,358 - openai._base_client - INFO - Retrying request to /chat/completions in 0.404370 seconds
+2025-04-27 23:17:11,768 - openai._base_client - INFO - Retrying request to /chat/completions in 0.893914 seconds
+2025-04-27 23:18:22,448 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-04-27 23:18:23,268 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-04-27 23:29:10,172 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-27 23:29:10,178 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-28 10:08:05,529 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-28 10:09:49,780 - src.codes.sql_query_generation - INFO - Natural Language Query: lekin continuously yah work nahin kar raha hai sahi se isko Sahi karna padega
+2025-04-28 10:09:50,383 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-04-28 10:10:36,213 - src.codes.sql_query_generation - INFO - Natural Language Query: hello how can you assist me
+2025-04-28 10:10:36,810 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-04-28 10:28:00,017 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-28 10:30:00,613 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-28 10:30:20,434 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-28 10:30:47,663 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.

@@ -5,6 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login</title>
   <link rel="stylesheet" href="/static/styles/login.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f7fa;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    .login-container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      padding: 32px 32px 24px 32px;
+      width: 100%;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .login-container .logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin-bottom: 16px;
+      object-fit: cover;
+    }
+    .login-container h2 {
+      margin: 0 0 24px 0;
+      font-size: 1.4rem;
+      text-align: center;
+      color: #3f51b5;
+      font-weight: bold;
+    }
+    .form-fields {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .form-fields input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .form-fields input:focus {
+      border: 1.5px solid #3f51b5;
+    }
+    .form-fields button {
+      padding: 12px;
+      background: #3f51b5;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .form-fields button:hover {
+      background: #283593;
+    }
+    .bottom-text {
+      margin-top: 18px;
+      font-size: 0.97rem;
+      text-align: center;
+    }
+    .bottom-text a {
+      color: #3f51b5;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    @media (max-width: 500px) {
+      .login-container {
+        max-width: 95vw;
+        padding: 18px 8px 14px 8px;
+      }
+      .login-container .logo {
+        width: 50px;
+        height: 50px;
+      }
+      .login-container h2 {
+        font-size: 1.1rem;
+      }
+      .form-fields input, .form-fields button {
+        font-size: 0.97rem;
+        padding: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="login-container">
@@ -14,11 +110,19 @@
     <form id="loginForm" onsubmit="return login(event)">
       <div class="form-fields">
         <input type="text" id="username" placeholder="Username" required />
-        <input type="password" id="password" placeholder="Password" required />
+        <div style="position: relative;">
+          <input type="password" id="password" placeholder="Password" required style="width: 100%;"/>
+          <span id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.1em; color: #888;">
+            👁️
+          </span>
+        </div>
         <button type="submit">Login</button>
       </div>
       <div id="error-message" style="color: red; margin-top: 10px;"></div>
     </form>
+    <p style="font-size:0.85em;color:#888;text-align:center;margin-top:8px;">
+      Enter correct username and password
+    </p>
 
     <p class="bottom-text">
       Don't have an account? <a href="/signup">Signup here</a>
@@ -26,5 +130,23 @@
   </div>
 
   <script src="/static/javascripts/login.js"></script>
+  <script>
+    // Password show/hide toggle
+    document.addEventListener("DOMContentLoaded", function() {
+      const pwdInput = document.getElementById('password');
+      const toggle = document.getElementById('togglePassword');
+      if (toggle && pwdInput) {
+        toggle.addEventListener('click', function() {
+          if (pwdInput.type === "password") {
+            pwdInput.type = "text";
+            toggle.textContent = "🙈";
+          } else {
+            pwdInput.type = "password";
+            toggle.textContent = "👁️";
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

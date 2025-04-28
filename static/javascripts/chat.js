@@ -19,19 +19,14 @@ msgerForm.addEventListener("submit", function(event) {
   botResponse(msgText);
 });
 
-// Allow Enter key to send message (default for form submit), but prevent newline in input
-msgerInput.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    msgerForm.dispatchEvent(new Event('submit'));
-  }
-});
-
 // Add mic button support and send both text and audio to backend
 const micBtn = document.getElementById("mic-btn");
 
-if (micBtn && window.hasOwnProperty('webkitSpeechRecognition')) {
-  const recognition = new webkitSpeechRecognition();
+// Use both SpeechRecognition and webkitSpeechRecognition for compatibility
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (micBtn && SpeechRecognition) {
+  const recognition = new SpeechRecognition();
   recognition.continuous = false;
   recognition.interimResults = false;
   recognition.lang = "en-US";
@@ -43,6 +38,7 @@ if (micBtn && window.hasOwnProperty('webkitSpeechRecognition')) {
     const transcript = event.results[0][0].transcript;
     msgerInput.value = transcript;
     micBtn.classList.remove("listening");
+    // Optionally auto-send after speech
     msgerForm.dispatchEvent(new Event('submit'));
   };
   recognition.onerror = function() {
@@ -54,6 +50,23 @@ if (micBtn && window.hasOwnProperty('webkitSpeechRecognition')) {
 } else if (micBtn) {
   micBtn.disabled = true;
   micBtn.title = "Speech recognition not supported";
+}
+
+// Ensure logout button works even if script loads before DOM is ready
+function setupLogoutBtn() {
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn) {
+    logoutBtn.onclick = function(event) {
+      event.preventDefault(); // Prevent default form/button behavior
+      window.location.replace("/login"); // Use replace for logout navigation
+    };
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupLogoutBtn);
+} else {
+  setupLogoutBtn();
 }
 
 function appendMessage(name, img, side, text) {
@@ -70,9 +83,10 @@ function appendMessage(name, img, side, text) {
     </div>
   `;
   msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-  msgerChat.scrollTop = msgerChat.scrollHeight;
+  msgerChat.scrollTop = msgerChat.scrollHeight; // Ensure always scrolls to bottom
 }
 
+// Modify botResponse to use fetch and POST to Python backend
 function botResponse(rawText) {
   fetch("/get", {
     method: "POST",

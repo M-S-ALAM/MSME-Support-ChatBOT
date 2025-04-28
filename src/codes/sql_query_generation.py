@@ -99,3 +99,5 @@ class SQLQueryGenerator:
         if "no_sql" in cleaned_query.lower() or not re.match(r"^(SELECT|WITH|INSERT|UPDATE|DELETE|SHOW)", cleaned_query, re.IGNORECASE):
             return None
         return cleaned_query
+
+

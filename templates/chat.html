@@ -125,6 +125,9 @@
     <div class="msger-header-title">
       💬 Intelligent Chatbot for MSMEs
     </div>
+    <button id="logout-btn" style="position: absolute; right: 24px; top: 24px; background: #e91e63; color: #fff; border: none; border-radius: 4px; padding: 8px 16px; font-size: 1em; cursor: pointer;">
+      Logout
+    </button>
   </header>
 
   <main class="msger-chat" id="msger-chat">
@@ -136,7 +139,7 @@
           <div class="msg-info-time" id="chatbot-time"></div>
         </div>
         <div class="msg-text">
-          Hi, welcome to ChatBot! Go ahead and send me a message. 😄
+          Hi, welcome to MSEMChatBot! 🙏
         </div>
       </div>
     </div>
@@ -144,10 +147,13 @@
 
   <form class="msger-inputarea" id="msger-form">
     <input type="text" class="msger-input" id="textInput" placeholder="Enter your message..." required>
-    <button type="button" id="mic-btn" class="msger-mic-btn" title="Speak">
-      <i class="fas fa-microphone"></i>
+    <button type="button" id="mic-btn" class="msger-mic-btn" title="Speak" style="background: transparent;">
+      🎙️
     </button>
-    <button type="submit" class="msger-send-btn">Send</button>
+    <button type="submit" class="msger-send-btn" title="Send">
+      <!-- Upward arrow Unicode character -->
+      &#8593;
+    </button>
   </form>
 </section>
 

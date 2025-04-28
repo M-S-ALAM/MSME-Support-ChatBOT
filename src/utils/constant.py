@@ -41,6 +41,7 @@ class Constants:
     """
 
     # Constants for file paths
+    SECRET_KEY = os.environ.get("SECRET_KEY", "change-this-in-production")  # Load from env, fallback for dev
     DATA_PATH = "Database/"
     OUTPUT_PATH = "output/"
     LOG_PATH = "logs/"
