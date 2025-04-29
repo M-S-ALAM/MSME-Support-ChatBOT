@@ -58,7 +58,7 @@ function setupLogoutBtn() {
   if (logoutBtn) {
     logoutBtn.onclick = function(event) {
       event.preventDefault(); // Prevent default form/button behavior
-      window.location.replace("/login"); // Use replace for logout navigation
+      window.location.replace("/"); // Redirect to root (login page)
     };
   }
 }
@@ -95,12 +95,23 @@ function botResponse(rawText) {
     },
     body: JSON.stringify({ msg: rawText })
   })
-    .then(response => response.json())
-    .then(data => {
-      appendMessage(BOT_NAME, BOT_IMG, "left", data.reply || data || "No response");
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
     })
-    .catch(() => {
+    .then(data => {
+      // Defensive: handle both {reply: ...} and plain string
+      const reply = (typeof data === "object" && data.reply !== undefined)
+        ? data.reply
+        : (typeof data === "string" ? data : "No response");
+      appendMessage(BOT_NAME, BOT_IMG, "left", reply);
+    })
+    .catch((err) => {
       appendMessage(BOT_NAME, BOT_IMG, "left", "Sorry, there was an error.");
+      // Optionally log error for debugging
+      // console.error(err);
     });
 }
 
