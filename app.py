@@ -5,7 +5,10 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 import csv
 import os
+import bcrypt
 from inference import LLMChatBot
+from jwtsign import sign_token, get_current_user
+
 
 app = FastAPI()
 
@@ -51,6 +54,8 @@ async def signup_user(request: Request):
             for row in reader:
                 if row["username"] == username or row["email"] == email:
                     return JSONResponse({"success": False, "message": "Username or email already exists."}, status_code=status.HTTP_400_BAD_REQUEST)
+    # Hash the password before saving
+    hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
     # Write new user
     file_exists = os.path.isfile(csv_path)
     with open(csv_path, "a", newline="", encoding="utf-8") as f:
@@ -58,7 +63,7 @@ async def signup_user(request: Request):
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         if not file_exists:
             writer.writeheader()
-        writer.writerow({"username": username, "email": email, "password": password})
+        writer.writerow({"username": username, "email": email, "password": hashed_password})
     return JSONResponse({"success": True, "message": "Signup successful."})
 
 @app.post("/login")
@@ -73,12 +78,20 @@ async def login_user(request: Request):
         return JSONResponse({"success": False, "message": "User database not found."}, status_code=status.HTTP_404_NOT_FOUND)
     with open(csv_path, "r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        for row in reader:            # Compare all fields after stripping and lowercasing username for robustness
-            if (
-                row["username"].strip().lower() == username.strip().lower() and
-                row["password"].strip() == password.strip()
-            ):
-                return JSONResponse({"success": True, "message": "Login successful."})
+        for row in reader:
+            # Compare username after stripping and lowercasing for robustness
+            if row["username"].strip().lower() == username.strip().lower():
+                # Verify password using bcrypt (encrypted check)
+                if bcrypt.checkpw(password.strip().encode("utf-8"), row["password"].encode("utf-8")):
+                    # Generate JWT token using jwtsign
+                    token = sign_token(row["email"])
+                    print("Generated token:", token)
+                    return JSONResponse({
+                        "success": True,
+                        "message": "Login successful.",
+                        "access_token": token,
+                        "token_type": "bearer"
+                    })
     return JSONResponse({"success": False, "message": "Invalid username or password."}, status_code=status.HTTP_401_UNAUTHORIZED)
 
 @app.get("/chat", response_class=HTMLResponse)

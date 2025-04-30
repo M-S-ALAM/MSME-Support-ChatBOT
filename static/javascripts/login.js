@@ -16,6 +16,10 @@ function login(event) {
     .then(response => response.json())
     .then(data => {
       if (data.success) {
+        // Store JWT access token in localStorage for authenticated requests
+        if (data.access_token) {
+          localStorage.setItem("access_token", data.access_token);
+        }
         localStorage.setItem("authenticated", "true");
         window.location.href = "/chat";
       } else {

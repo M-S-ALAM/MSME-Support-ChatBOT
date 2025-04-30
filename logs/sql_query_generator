@@ -743,3 +743,13 @@ FROM Customer;
 2025-04-29 09:58:48,931 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-04-29 10:02:33,885 - src.codes.sql_query_generation - INFO - Natural Language Query: how many customer are there
 2025-04-29 10:02:35,400 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(customer_id) AS total_customers FROM Customer;
+2025-04-30 17:33:18,462 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-30 17:36:37,086 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-30 17:55:31,065 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-30 18:24:18,989 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-30 18:26:40,335 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-30 18:27:32,675 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-30 18:30:11,228 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-30 18:31:01,347 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-30 18:36:29,274 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-04-30 18:36:50,552 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
