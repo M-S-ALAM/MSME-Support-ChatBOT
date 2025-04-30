@@ -19,19 +19,14 @@ msgerForm.addEventListener("submit", function(event) {
   botResponse(msgText);
 });
 
-// Allow Enter key to send message (default for form submit), but prevent newline in input
-msgerInput.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    msgerForm.dispatchEvent(new Event('submit'));
-  }
-});
-
 // Add mic button support and send both text and audio to backend
 const micBtn = document.getElementById("mic-btn");
 
-if (micBtn && window.hasOwnProperty('webkitSpeechRecognition')) {
-  const recognition = new webkitSpeechRecognition();
+// Use both SpeechRecognition and webkitSpeechRecognition for compatibility
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (micBtn && SpeechRecognition) {
+  const recognition = new SpeechRecognition();
   recognition.continuous = false;
   recognition.interimResults = false;
   recognition.lang = "en-US";
@@ -43,6 +38,7 @@ if (micBtn && window.hasOwnProperty('webkitSpeechRecognition')) {
     const transcript = event.results[0][0].transcript;
     msgerInput.value = transcript;
     micBtn.classList.remove("listening");
+    // Optionally auto-send after speech
     msgerForm.dispatchEvent(new Event('submit'));
   };
   recognition.onerror = function() {
@@ -54,6 +50,23 @@ if (micBtn && window.hasOwnProperty('webkitSpeechRecognition')) {
 } else if (micBtn) {
   micBtn.disabled = true;
   micBtn.title = "Speech recognition not supported";
+}
+
+// Ensure logout button works even if script loads before DOM is ready
+function setupLogoutBtn() {
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn) {
+    logoutBtn.onclick = function(event) {
+      event.preventDefault(); // Prevent default form/button behavior
+      window.location.replace("/"); // Redirect to root (login page)
+    };
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupLogoutBtn);
+} else {
+  setupLogoutBtn();
 }
 
 function appendMessage(name, img, side, text) {
@@ -70,9 +83,10 @@ function appendMessage(name, img, side, text) {
     </div>
   `;
   msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-  msgerChat.scrollTop = msgerChat.scrollHeight;
+  msgerChat.scrollTop = msgerChat.scrollHeight; // Ensure always scrolls to bottom
 }
 
+// Modify botResponse to use fetch and POST to Python backend
 function botResponse(rawText) {
   fetch("/get", {
     method: "POST",
@@ -81,12 +95,23 @@ function botResponse(rawText) {
     },
     body: JSON.stringify({ msg: rawText })
   })
-    .then(response => response.json())
-    .then(data => {
-      appendMessage(BOT_NAME, BOT_IMG, "left", data.reply || data || "No response");
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
     })
-    .catch(() => {
+    .then(data => {
+      // Defensive: handle both {reply: ...} and plain string
+      const reply = (typeof data === "object" && data.reply !== undefined)
+        ? data.reply
+        : (typeof data === "string" ? data : "No response");
+      appendMessage(BOT_NAME, BOT_IMG, "left", reply);
+    })
+    .catch((err) => {
       appendMessage(BOT_NAME, BOT_IMG, "left", "Sorry, there was an error.");
+      // Optionally log error for debugging
+      // console.error(err);
     });
 }
 

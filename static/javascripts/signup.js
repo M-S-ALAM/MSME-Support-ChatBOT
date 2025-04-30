@@ -8,6 +8,12 @@ function signup(event) {
   // Clear previous error
   if (errorDiv) errorDiv.textContent = "";
 
+  // Basic validation
+  if (!username || !email || !password) {
+    if (errorDiv) errorDiv.textContent = "❌ All fields are required.";
+    return false;
+  }
+
   fetch("/signup", {
     method: "POST",
     headers: {
@@ -26,4 +32,6 @@ function signup(event) {
     .catch(() => {
       if (errorDiv) errorDiv.textContent = "❌ An error occurred during signup.";
     });
+
+  return false; // Prevent default form submission
 }

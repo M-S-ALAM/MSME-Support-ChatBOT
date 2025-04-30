@@ -85,8 +85,8 @@ body {
 
 .msger-mic-btn {
   margin-left: 10px;
-  background: #ff4081;
-  color: #fff;
+  background: transparent;
+  color: #ff4081;
   font-weight: bold;
   border: none;
   border-radius: 3px;
