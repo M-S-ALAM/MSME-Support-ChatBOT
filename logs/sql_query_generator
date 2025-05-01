@@ -753,3 +753,13 @@ FROM Customer;
 2025-04-30 18:31:01,347 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-04-30 18:36:29,274 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-04-30 18:36:50,552 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 09:57:38,999 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 10:01:54,673 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 12:09:03,221 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 12:13:46,281 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 12:15:42,063 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 12:16:03,370 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 12:16:43,581 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 12:17:45,397 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 12:38:19,054 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-01 12:40:34,902 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.

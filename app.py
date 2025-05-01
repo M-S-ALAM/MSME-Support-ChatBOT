@@ -116,3 +116,37 @@ async def get_bot_response(data: dict = Body(...)):
 async def logout():
     # Optionally clear session/cookies here if implemented
     return RedirectResponse(url="/", status_code=302)
+
+@app.get("/forgot_password", response_class=HTMLResponse)
+async def forgot_password_page(request: Request):
+    return templates.TemplateResponse("forgot_password.html", {"request": request})
+
+@app.post("/forgot_password")
+async def forgot_password(
+    username: str = Form(...),
+    email: str = Form(...),
+    new_password: str = Form(...),
+):
+    csv_path = os.path.join("Database", "users.csv")
+    if not os.path.exists(csv_path):
+        return JSONResponse({"success": False, "message": "User database not found."}, status_code=status.HTTP_404_NOT_FOUND)
+    users = []
+    user_found = False
+    # Read all users and update the matching one
+    with open(csv_path, "r", newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row["username"].strip().lower() == username.strip().lower() and row["email"].strip().lower() == email.strip().lower():
+                # Update password
+                row["password"] = bcrypt.hashpw(new_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+                user_found = True
+            users.append(row)
+    if not user_found:
+        return JSONResponse({"success": False, "message": "Username and email do not match."}, status_code=status.HTTP_400_BAD_REQUEST)
+    # Write back updated users
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        fieldnames = ["username", "email", "password"]
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(users)
+    return JSONResponse({"success": True, "message": "Password reset successful."})
