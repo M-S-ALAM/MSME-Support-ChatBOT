@@ -21,9 +21,9 @@
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-      padding: 40px 40px 32px 40px;
+      padding: 40px;
       width: 100%;
-      max-width: 400px;
+      max-width: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -52,8 +52,30 @@
       color: #3f51b5;
       text-decoration: none;
       font-weight: bold;
-      margin-top: 10px;
+      margin-top: 20px;
       display: inline-block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    th {
+      background: #f5f7fa;
+      color: #d32f2f;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    #user-table-container h2 {
+      color: #3f51b5;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -62,7 +84,26 @@
     <img src="/static/img/msme.jpg" alt="Admin Logo" class="logo" />
     <h1>Welcome, Admin!</h1>
     <p>You have successfully logged in to the Admin Dashboard.</p>
-    <a href="/">Logout</a>
+
+    <div id="user-table-container">
+      <h2>Registered Users</h2>
+      <table id="user-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Contact Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- User rows will be dynamically inserted here -->
+        </tbody>
+      </table>
+    </div>
+
+    <a href="/admin_logout">Logout</a>
   </div>
+
+  <script src="/static/javascripts/admin_dashboard.js"></script>
 </body>
 </html>

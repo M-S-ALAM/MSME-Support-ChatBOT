@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Request, Form, status, Body, BackgroundTasks
+from fastapi import FastAPI, Request, Form, status, Body, BackgroundTasks, Depends, Response
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.requests import HTTPConnection
 import csv
 import os
 import bcrypt
@@ -11,7 +12,26 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from inference import LLMChatBot
 from jwtsign import sign_token, get_current_user
+from jose import JWTError
+from jose import jwt
+from dotenv import load_dotenv
 
+SECRET_KEY = "your-secret-key"  # Use your actual secret key
+ALGORITHM = "HS256"
+
+def get_current_user_from_cookie(request: Request):
+    token = request.cookies.get("access_token")
+    if not token:
+        return None
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload.get("sub")
+    except JWTError:
+        return None
+
+# Helper to check admin session (very basic, for demonstration)
+def is_admin_logged_in(request: Request):
+    return request.cookies.get("admin_logged_in") == "true"
 
 app = FastAPI()
 
@@ -106,6 +126,9 @@ async def login_user(request: Request):
 
 @app.get("/chat", response_class=HTMLResponse)
 async def chat_page(request: Request):
+    user = get_current_user_from_cookie(request)
+    if not user:
+        return RedirectResponse(url="/", status_code=302)
     return templates.TemplateResponse("chat.html", {"request": request})
 
 @app.post("/get")
@@ -201,6 +224,7 @@ async def forgot_password(
 
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_login_page(request: Request):
+    # Optionally, check for admin session/cookie here
     return templates.TemplateResponse("admin.html", {"request": request})
 
 @app.post("/admin_login")
@@ -208,17 +232,43 @@ async def admin_login(request: Request):
     data = await request.json()
     username = data.get("username")
     password = data.get("password")
-    ADMIN_USERNAME = "admin"
-    ADMIN_PASSWORD = "admin@123"  # Change this to your desired admin password
+    ADMIN_USERNAME = "gyandata"
+    ADMIN_PASSWORD = "gyandata"  # Change this to your desired admin password
 
     if not username or not password:
         return JSONResponse({"success": False, "message": "All fields are required."}, status_code=400)
     if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
-        # On successful login, redirect to admin_dashboard
-        return JSONResponse({"success": True, "message": "Admin login successful.", "redirect_url": "/admin_dashboard"})
+        response = JSONResponse({"success": True, "message": "Admin login successful.", "redirect_url": "/admin_dashboard"})
+        response.set_cookie(key="admin_logged_in", value="true", httponly=True)
+        return response
     else:
         return JSONResponse({"success": False, "message": "Invalid admin credentials."}, status_code=401)
 
 @app.get("/admin_dashboard", response_class=HTMLResponse)
 async def admin_dashboard(request: Request):
+    if not is_admin_logged_in(request):
+        return RedirectResponse(url="/admin", status_code=302)
     return templates.TemplateResponse("admin_dashboard.html", {"request": request})
+
+@app.get("/admin_users")
+async def admin_users(request: Request):
+    if not is_admin_logged_in(request):
+        return JSONResponse({"success": False, "message": "Unauthorized"}, status_code=401)
+    csv_path = os.path.join("Database", "users.csv")
+    users = []
+    if os.path.exists(csv_path):
+        with open(csv_path, "r", newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                users.append({
+                    "username": row.get("username", ""),
+                    "email": row.get("email", ""),
+                    "contact_number": row.get("contact_number", "")
+                })
+    return JSONResponse({"success": True, "users": users})
+
+@app.get("/admin_logout")
+async def admin_logout():
+    response = RedirectResponse(url="/admin", status_code=302)
+    response.delete_cookie("admin_logged_in")
+    return response
