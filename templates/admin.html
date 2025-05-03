@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="/static/styles/login.css" />
+  <style>
+    /* ...existing code for login page styling... */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f7fa;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    .admin-container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      padding: 32px 32px 24px 32px;
+      width: 100%;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .admin-container .logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin-bottom: 16px;
+      object-fit: cover;
+    }
+    .admin-container h2 {
+      margin: 0 0 24px 0;
+      font-size: 1.4rem;
+      text-align: center;
+      color: #d32f2f;
+      font-weight: bold;
+    }
+    .form-fields {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .form-fields input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .form-fields input:focus {
+      border: 1.5px solid #d32f2f;
+    }
+    .form-fields button {
+      padding: 12px;
+      background: #d32f2f;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .form-fields button:hover {
+      background: #b71c1c;
+    }
+    .bottom-text {
+      margin-top: 18px;
+      font-size: 0.97rem;
+      text-align: center;
+    }
+    .bottom-text a {
+      color: #d32f2f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    @media (max-width: 500px) {
+      .admin-container {
+        max-width: 95vw;
+        padding: 18px 8px 14px 8px;
+      }
+      .admin-container .logo {
+        width: 50px;
+        height: 50px;
+      }
+      .admin-container h2 {
+        font-size: 1.1rem;
+      }
+      .form-fields input, .form-fields button {
+        font-size: 0.97rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <img src="/static/img/msme.jpg" alt="Admin Logo" class="logo" />
+    <h2>🛡️ Admin Login</h2>
+    <form id="adminLoginForm">
+      <div class="form-fields">
+        <input type="text" id="admin-username" name="username" placeholder="Admin Username" required />
+        <div style="position: relative;">
+          <input type="password" id="admin-password" name="password" placeholder="Password" required />
+          <span id="toggleAdminPassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.1em; color: #888;">
+            👁️
+          </span>
+        </div>
+        <button type="submit">Login</button>
+      </div>
+      <div id="admin-error-message" style="color: red; margin-top: 10px;"></div>
+    </form>
+    <p class="bottom-text">
+      Not an admin? <a href="/">User Login</a>
+    </p>
+  </div>
+  <script src="/static/javascripts/admin.js"></script>
+</body>
+</html>

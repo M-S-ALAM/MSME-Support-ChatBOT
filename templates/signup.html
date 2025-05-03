@@ -108,10 +108,11 @@
     <h2>Create Your MSME ChatBOT Account</h2>
     <form id="signupForm" onsubmit="return signup(event)">
       <div class="form-fields">
-        <input type="text" id="signup-username" placeholder="Enter Username" required />
-        <input type="email" id="email_id" placeholder="Email ID" required />
+        <input type="text" id="signup-username" name="username" placeholder="Enter Username" required />
+        <input type="email" id="email_id" name="email" placeholder="Email ID" required />
+        <input type="tel" id="contact_number" name="contact_number" placeholder="Contact Number" pattern="[0-9]{10,15}" required />
         <div style="position: relative;">
-          <input type="password" id="signup-password" placeholder="Enter Password" required style="width: 100%;" />
+          <input type="password" id="signup-password" name="password" placeholder="Enter Password" required style="width: 100%;" />
           <span id="toggleSignupPassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.1em; color: #888;">
             👁️
           </span>
@@ -146,6 +147,52 @@
           }
         });
       }
+
+      // Ensure signup form sends all required fields with correct keys
+      window.signup = function(event) {
+        event.preventDefault();
+        const username = document.getElementById('signup-username').value.trim();
+        const email = document.getElementById('email_id').value.trim();
+        const contact_number = document.getElementById('contact_number').value.trim();
+        const password = document.getElementById('signup-password').value.trim();
+        const errorDiv = document.getElementById('signup-error-message');
+        errorDiv.textContent = "";
+
+        if (!username || !email || !contact_number || !password) {
+          errorDiv.textContent = "❌ All fields are required.";
+          return false;
+        }
+
+        fetch("/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            contact_number: contact_number,
+            password: password
+          })
+        })
+        .then(async res => {
+          let data;
+          try {
+            data = await res.json();
+          } catch (e) {
+            errorDiv.textContent = "❌ Server error: Invalid response.";
+            return;
+          }
+          if (res.ok && data.success) {
+            window.location.href = "/";
+          } else {
+            errorDiv.textContent = "❌ " + (data && data.message ? data.message : "Signup failed.");
+          }
+        })
+        .catch(() => {
+          errorDiv.textContent = "❌ Signup failed. Please try again.";
+        });
+
+        return false;
+      };
     });
   </script>
 </body>
