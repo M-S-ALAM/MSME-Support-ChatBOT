@@ -120,10 +120,16 @@
       </div>
       <div id="admin-error-message" style="color: red; margin-top: 10px;"></div>
     </form>
-    <p class="bottom-text">
-      Not an admin? <a href="/">User Login</a>
-    </p>
   </div>
   <script src="/static/javascripts/admin.js"></script>
+  <script>
+    // Ensure adminLogin is bound to the form submit event
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById('adminLoginForm');
+      if (form) {
+        form.onsubmit = window.adminLogin;
+      }
+    });
+  </script>
 </body>
 </html>

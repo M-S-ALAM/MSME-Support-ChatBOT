@@ -777,3 +777,24 @@ FROM Customer;
 2025-05-02 10:06:06,665 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-05-03 23:03:39,815 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-05-03 23:07:49,278 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:17:31,552 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:25:23,127 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:25:43,379 - src.codes.sql_query_generation - INFO - Natural Language Query: tell me about your self
+2025-05-03 23:25:44,008 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-05-03 23:27:25,210 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:33:08,776 - jose - WARNING - cjson not found, falling back to stdlib json
+2025-05-03 23:33:16,110 - jose - WARNING - cjson not found, falling back to stdlib json
+2025-05-03 23:33:33,544 - jose - WARNING - cjson not found, falling back to stdlib json
+2025-05-03 23:34:09,063 - jose - WARNING - cjson not found, falling back to stdlib json
+2025-05-03 23:34:58,527 - jose - WARNING - cjson not found, falling back to stdlib json
+2025-05-03 23:39:14,333 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:45:41,828 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:45:41,861 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:46:34,168 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:46:34,215 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:46:37,152 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:46:37,747 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:46:48,818 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-03 23:49:53,377 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-04 00:12:55,962 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-04 00:13:00,578 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
