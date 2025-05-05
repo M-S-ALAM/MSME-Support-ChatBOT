@@ -4,95 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="/static/styles/login.css" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      width: 100vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #f5f7fa;
-      font-family: Helvetica, Arial, sans-serif;
-    }
-    .dashboard-container {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-      padding: 40px;
-      width: 100%;
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .dashboard-container .logo {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      margin-bottom: 18px;
-      object-fit: cover;
-    }
-    .dashboard-container h1 {
-      margin: 0 0 18px 0;
-      font-size: 1.6rem;
-      color: #d32f2f;
-      text-align: center;
-      font-weight: bold;
-    }
-    .dashboard-container p {
-      font-size: 1.1rem;
-      color: #333;
-      text-align: center;
-      margin-bottom: 18px;
-    }
-    .dashboard-container a {
-      color: #3f51b5;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 20px;
-      display: inline-block;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 18px;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px 10px;
-      text-align: left;
-    }
-    th {
-      background: #f5f7fa;
-      color: #d32f2f;
-    }
-    tr:nth-child(even) {
-      background: #f9f9f9;
-    }
-    #user-table-container h2 {
-      color: #3f51b5;
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="/static/styles/admin_dashboard.css" />
 </head>
 <body>
   <div class="dashboard-container">
-    <img src="/static/img/msme.jpg" alt="Admin Logo" class="logo" />
-    <h1>Welcome, Admin!</h1>
-    <p>You have successfully logged in to the Admin Dashboard.</p>
+    <!-- Header box: logo and title -->
+    <div class="dashboard-header">
+      <img src="/static/img/msme.jpg" alt="Admin Logo" class="logo" />
+      <div class="header-title">
+        <h1>Welcome, Admin!</h1>
+        <p>You have successfully logged in to the Admin Dashboard.</p>
+      </div>
+      <a href="/admin_logout" class="logout-link">Logout</a>
+    </div>
 
-    <div id="user-table-container">
+    <!-- Content box: CSV data table -->
+    <div class="dashboard-content">
       <h2>Registered Users</h2>
-      <table id="user-table">
+      <!-- The table below is dynamically populated with user data from users.csv via /admin_users -->
+      <table class="dashboard-table" id="user-table">
         <thead>
           <tr>
             <th>Username</th>
             <th>Email</th>
             <th>Contact Number</th>
+            <th>Authentication</th>
           </tr>
         </thead>
         <tbody>
@@ -100,10 +36,70 @@
         </tbody>
       </table>
     </div>
-
-    <a href="/admin_logout">Logout</a>
   </div>
 
-  <script src="/static/javascripts/admin_dashboard.js"></script>
+  <script>
+    // Fetch user data from /admin_users and populate the table
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("/admin_users", { credentials: "include" })
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector("#user-table tbody");
+          tbody.innerHTML = "";
+
+          if (data.success && Array.isArray(data.users) && data.users.length > 0) {
+            data.users.forEach(user => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+                <td>${user.username || user.Username || ""}</td>
+                <td>${user.email || user.Email || ""}</td>
+                <td>${user.contact_number || user["Contact Number"] || ""}</td>
+                <td>
+                  <select class="auth-select" data-username="${user.username || user.Username || ""}">
+                    <option value="Verified" ${(user.Authentication === "Verified") ? "selected" : ""}>Verified</option>
+                    <option value="Pending" ${(user.Authentication === "Pending") ? "selected" : ""}>Pending</option>
+                    <option value="Rejected" ${(user.Authentication === "Rejected") ? "selected" : ""}>Rejected</option>
+                    <option value="Blocked" ${(user.Authentication === "Blocked") ? "selected" : ""}>Blocked</option>
+                  </select>
+                </td>
+              `;
+              tbody.appendChild(tr);
+            });
+
+            // Add event listeners to all dropdowns
+            document.querySelectorAll('.auth-select').forEach(select => {
+              select.addEventListener('change', function() {
+                const username = this.getAttribute('data-username');
+                const value = this.value;
+                fetch('/update_authentication', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ username: username, Authentication: value })
+                })
+                .then(res => res.json())
+                .then(resp => {
+                  if (!resp.success) {
+                    alert("Failed to update authentication status.");
+                  }
+                })
+                .catch(() => {
+                  alert("Failed to update authentication status.");
+                });
+              });
+            });
+
+          } else {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `<td colspan="4" style="color:red;">No user data found.</td>`;
+            tbody.appendChild(tr);
+          }
+        })
+        .catch(err => {
+          const tbody = document.querySelector("#user-table tbody");
+          tbody.innerHTML = `<tr><td colspan="4" style="color:red;">Failed to load user data.</td></tr>`;
+          console.error("Error fetching user data:", err);
+        });
+    });
+  </script>
 </body>
 </html>

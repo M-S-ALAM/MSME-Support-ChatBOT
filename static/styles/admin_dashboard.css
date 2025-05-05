@@ -1,0 +1,236 @@
+/* Reset some defaults */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+    height: 100%;
+    width: 100%;
+}
+
+/* Dashboard layout */
+.dashboard-container {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    background: #f4f6f8;
+    padding: 0;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: #232f3e;
+    color: #fff;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 30px;
+    display: block;
+    transition: background 0.2s;
+    border-left: 4px solid transparent;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background: #37475a;
+    border-left: 4px solid #febd69;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 40px 50px;
+}
+
+/* Header box: logo and title */
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+    padding: 32px 48px;
+    margin-bottom: 32px;
+}
+
+.dashboard-header .logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 32px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+}
+
+.dashboard-header .header-title {
+    flex: 1;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 8px 0;
+    font-size: 2rem;
+    color: #232f3e;
+    font-weight: 700;
+}
+
+.dashboard-header p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.dashboard-header .logout-link {
+    color: #fff;
+    background: #d32f2f;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+    margin-left: 32px;
+}
+
+.dashboard-header .logout-link:hover {
+    background: #b71c1c;
+}
+
+/* Cards */
+.dashboard-cards {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.dashboard-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+    padding: 30px 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.dashboard-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    color: #37475a;
+}
+
+.dashboard-card .card-value {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #232f3e;
+}
+
+/* Content box: CSV data table */
+.dashboard-content {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+    padding: 36px 48px;
+    margin: 0 48px 48px 48px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    min-height: 200px;
+}
+
+.dashboard-content h2 {
+    color: #3f51b5;
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+/* Table */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+    min-width: 600px;
+}
+
+.dashboard-table th, .dashboard-table td {
+    padding: 16px 18px;
+    text-align: left;
+    white-space: nowrap;
+    word-break: break-all;
+}
+
+.dashboard-table th {
+    background: #f3f3f3;
+    color: #232f3e;
+    font-weight: 600;
+}
+
+.dashboard-table tr {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.dashboard-table tr:last-child {
+    border-bottom: none;
+}
+
+.dashboard-table tr:hover {
+    background: #f9fafb;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .dashboard-cards {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .main-content {
+        padding: 20px 10px;
+    }
+    .sidebar {
+        width: 100px;
+        padding: 15px 0;
+    }
+    .sidebar h2 {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+    .sidebar a {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+    .dashboard-header, .dashboard-content {
+        padding: 18px 8px;
+        margin: 0 0 18px 0;
+    }
+    .dashboard-header .logo {
+        width: 48px;
+        height: 48px;
+        margin-right: 12px;
+    }
+    .dashboard-content {
+        padding: 12px 4px;
+    }
+}
