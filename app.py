@@ -256,16 +256,51 @@ async def admin_users(request: Request):
         return JSONResponse({"success": False, "message": "Unauthorized"}, status_code=401)
     csv_path = os.path.join("Database", "users.csv")
     users = []
+    # Try to support both lower-case and capitalized CSV headers for compatibility
     if os.path.exists(csv_path):
         with open(csv_path, "r", newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 users.append({
-                    "username": row.get("username", ""),
-                    "email": row.get("email", ""),
-                    "contact_number": row.get("contact_number", "")
+                    "username": row.get("username", "") or row.get("Username", ""),
+                    "email": row.get("email", "") or row.get("Email", ""),
+                    "contact_number": row.get("contact_number", "") or row.get("Contact Number", ""),
+                    "Authentication": row.get("Authentication", "no")
                 })
     return JSONResponse({"success": True, "users": users})
+
+@app.post("/update_authentication")
+async def update_authentication(data: dict):
+    username = data.get("username")
+    auth_value = data.get("Authentication")
+    if not username or not auth_value:
+        return JSONResponse({"success": False, "message": "Invalid data."}, status_code=400)
+    csv_path = os.path.join("Database", "users.csv")
+    if not os.path.exists(csv_path):
+        return JSONResponse({"success": False, "message": "User database not found."}, status_code=404)
+    users = []
+    updated = False
+    with open(csv_path, "r", newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        # Support both lower-case and capitalized username field
+        if "Authentication" not in fieldnames:
+            fieldnames = fieldnames + ["Authentication"]
+        for row in reader:
+            row_username = row.get("username", "") or row.get("Username", "")
+            if row_username == username:
+                row["Authentication"] = auth_value
+                updated = True
+            if "Authentication" not in row:
+                row["Authentication"] = "no"
+            users.append(row)
+    if not updated:
+        return JSONResponse({"success": False, "message": "User not found."}, status_code=404)
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(users)
+    return JSONResponse({"success": True, "message": "Authentication updated."})
 
 @app.get("/admin_logout")
 async def admin_logout():
