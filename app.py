@@ -64,11 +64,14 @@ async def signup_page(request: Request):
 
 @app.post("/signup")
 async def signup_user(request: Request):
-    data = await request.json()
+    try:
+        data = await request.json()
+    except Exception:
+        return JSONResponse({"success": False, "message": "Invalid JSON data."}, status_code=status.HTTP_400_BAD_REQUEST)
     username = data.get("username")
-    email = data.get("email") or data.get("email_id")  # Accept both keys for compatibility
+    email = data.get("email") or data.get("email_id")
     contact_number = data.get("contact_number")
-    password = data.get("password") or data.get("signup_password")  # Accept both keys for compatibility
+    password = data.get("password") or data.get("signup_password")
     if not username or not email or not contact_number or not password:
         return JSONResponse({"success": False, "message": "All fields are required."}, status_code=status.HTTP_400_BAD_REQUEST)
     csv_path = os.path.join("Database", "users.csv")
@@ -76,53 +79,103 @@ async def signup_user(request: Request):
     # Check for duplicate username, email, or contact number
     if os.path.exists(csv_path):
         with open(csv_path, "r", newline="", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                if row["username"] == username or row["email"] == email or row.get("contact_number") == contact_number:
-                    return JSONResponse({"success": False, "message": "Username, email, or contact number already exists."}, status_code=status.HTTP_400_BAD_REQUEST)
+            try:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    if row.get("username") == username or row.get("email") == email or row.get("contact_number") == contact_number:
+                        return JSONResponse({"success": False, "message": "Username, email, or contact number already exists."}, status_code=status.HTTP_400_BAD_REQUEST)
+            except Exception:
+                pass  # If file is empty or malformed, allow signup to proceed
     # Hash the password before saving
     hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
     # Write new user
     file_exists = os.path.isfile(csv_path)
     with open(csv_path, "a", newline="", encoding="utf-8") as f:
-        fieldnames = ["username", "email", "contact_number", "password"]
+        fieldnames = ["username", "email", "contact_number", "password", "Authentication", "token_used"]
         writer = csv.DictWriter(f, fieldnames=fieldnames)
-        if not file_exists:
+        if not file_exists or os.stat(csv_path).st_size == 0:
+            
             writer.writeheader()
-        writer.writerow({"username": username, "email": email, "contact_number": contact_number, "password": hashed_password})
+        writer.writerow({
+            "username": username,
+            "email": email,
+            "contact_number": contact_number,
+            "password": hashed_password,
+            "Authentication": "Pending",
+            "token_used": "0"
+        })
     return JSONResponse({"success": True, "message": "Signup successful."})
+
+import traceback
 
 @app.post("/login")
 async def login_user(request: Request):
-    data = await request.json()
-    username = data.get("username")
-    password = data.get("password")
-    if not username or not password:
-        return JSONResponse({"success": False, "message": "All fields are required."}, status_code=status.HTTP_400_BAD_REQUEST)
-    csv_path = os.path.join("Database", "users.csv")
-    if not os.path.exists(csv_path):
-        return JSONResponse({"success": False, "message": "User database not found."}, status_code=status.HTTP_404_NOT_FOUND)
-    with open(csv_path, "r", newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            # Compare username after stripping and lowercasing for robustness
-            if row["username"].strip().lower() == username.strip().lower():
-                # Defensive: check for missing password field
-                row_password = row.get("password")
-                if not row_password:
-                    continue
-                # Defensive: handle possible whitespace in password field
-                if bcrypt.checkpw(password.strip().encode("utf-8"), row_password.strip().encode("utf-8")):
-                    # Generate JWT token using jwtsign
-                    token = sign_token(row["email"])
-                    print("Generated token:", token)
-                    return JSONResponse({
-                        "success": True,
-                        "message": "Login successful.",
-                        "access_token": token,
-                        "token_type": "bearer"
-                    })
-    return JSONResponse({"success": False, "message": "Invalid username or password."}, status_code=status.HTTP_401_UNAUTHORIZED)
+    try:
+        data = await request.json()
+        username = data.get("username", "").strip()
+        password = data.get("password", "")
+
+        if not username or not password:
+            return JSONResponse({"success": False, "message": "All fields are required."}, status_code=status.HTTP_400_BAD_REQUEST)
+
+        csv_path = os.path.join("Database", "users.csv")
+        if not os.path.exists(csv_path):
+            return JSONResponse({"success": False, "message": "User database not found."}, status_code=status.HTTP_404_NOT_FOUND)
+
+        with open(csv_path, "r", newline="", encoding="utf-8") as f:
+            try:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    vals = list(row.values())
+                    row_username = (row.get("username") or row.get("Username") or (vals[0] if len(vals) > 0 else "")).strip().lower()
+                    row_password_hash = row.get("password") or row.get("Password") or (vals[3] if len(vals) > 3 else "")
+                    row_email = row.get("email") or row.get("Email") or (vals[1] if len(vals) > 1 else "")
+                    if not row_username or not row_password_hash:
+                        continue
+                    try:
+                        # Defensive: check for empty or invalid hash
+                        if row_username == username.lower() and row_password_hash:
+                            try:
+                                if bcrypt.checkpw(password.encode("utf-8"), row_password_hash.encode("utf-8")):
+                                    token = sign_token(row_email)
+                                    print("✅ Generated token:", token)
+                                    print("✅ User authenticated:", username)
+                                    response = JSONResponse({
+                                        "success": True,
+                                        "message": "Login successful.",
+                                        "access_token": token,
+                                        "token_type": "bearer"
+                                    })
+                                    # Set SameSite and Secure for better browser compatibility
+                                    response.set_cookie(
+                                        key="access_token",
+                                        value=token,
+                                        httponly=True,
+                                        path="/",
+                                        samesite="lax"
+                                    )
+                                    return response
+                            except ValueError as bcrypt_err:
+                                print("❌ Bcrypt value error:", bcrypt_err)
+                                continue
+                            except Exception as bcrypt_err:
+                                print("❌ Bcrypt error:", bcrypt_err)
+                                continue
+                    except Exception as bcrypt_outer:
+                        print("❌ Outer bcrypt error:", bcrypt_outer)
+                        continue
+            except Exception as e:
+                print("❌ CSV read error:", e)
+                import traceback
+                traceback.print_exc()
+                return JSONResponse({"success": False, "message": "Server error reading user database."}, status_code=500)
+
+        return JSONResponse({"success": False, "message": "Invalid username or password."}, status_code=status.HTTP_401_UNAUTHORIZED)
+
+    except Exception as e:
+        print("❌ Exception during login:", e)
+        traceback.print_exc()  # This prints full stack trace in terminal
+        return JSONResponse({"success": False, "message": "An error occurred during login."}, status_code=500)
 
 @app.get("/chat", response_class=HTMLResponse)
 async def chat_page(request: Request):
@@ -165,11 +218,20 @@ async def send_verification_code(data: dict):
         return JSONResponse({"success": False, "message": "User database not found."}, status_code=404)
     user_exists = False
     with open(csv_path, "r", newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if row["username"].strip().lower() == username.strip().lower() and row["email"].strip().lower() == email.strip().lower():
-                user_exists = True
-                break
+        # Use csv.reader to support both header and no-header CSVs
+        reader = csv.reader(f)
+        rows = list(reader)
+        if not rows:
+            return JSONResponse({"success": False, "message": "User database is empty."}, status_code=404)
+        # Heuristic: check if first row is header
+        header_keywords = ['user', 'email', 'contact', 'auth']
+        is_header = any(any(key in cell.lower() for key in header_keywords) for cell in rows[0])
+        data_rows = rows[1:] if is_header else rows
+        for row in data_rows:
+            if len(row) >= 1 and len(row) >= 2:
+                if row[0].strip().lower() == username.strip().lower() and row[1].strip().lower() == email.strip().lower():
+                    user_exists = True
+                    break
     if not user_exists:
         return JSONResponse({"success": False, "message": "Username and email do not match."}, status_code=400)
     # Generate code and send email
@@ -207,7 +269,7 @@ async def forgot_password(
         reader = csv.DictReader(f)
         for row in reader:
             if row["username"].strip().lower() == username.strip().lower() and row["email"].strip().lower() == email.strip().lower():
-                row["password"] = bcrypt.hashpw(new_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+                row["pass•••••••word"] = bcrypt.hashpw(new_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
                 user_found = True
             users.append(row)
     if not user_found:
@@ -256,17 +318,33 @@ async def admin_users(request: Request):
         return JSONResponse({"success": False, "message": "Unauthorized"}, status_code=401)
     csv_path = os.path.join("Database", "users.csv")
     users = []
-    # Try to support both lower-case and capitalized CSV headers for compatibility
     if os.path.exists(csv_path):
         with open(csv_path, "r", newline="", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                users.append({
-                    "username": row.get("username", "") or row.get("Username", ""),
-                    "email": row.get("email", "") or row.get("Email", ""),
-                    "contact_number": row.get("contact_number", "") or row.get("Contact Number", ""),
-                    "Authentication": row.get("Authentication", "no")
-                })
+            reader = csv.reader(f)
+            rows = list(reader)
+            if not rows:
+                return JSONResponse({"success": True, "users": []})
+            # If the first row looks like a header, skip it
+            first_row = rows[0]
+            # Heuristic: if any cell in the first row contains 'user' or 'email', treat as header
+            header_keywords = ['user', 'email', 'contact', 'auth']
+            is_header = any(any(key in cell.lower() for key in header_keywords) for cell in first_row)
+            data_rows = rows[1:] if is_header else rows
+            for row in data_rows:
+                if not any(row):
+                    continue
+                user = {}
+                if len(row) >= 1:
+                    user["username"] = row[0]
+                if len(row) >= 2:
+                    user["email"] = row[1]
+                if len(row) >= 3:
+                    user["contact_number"] = row[2]
+                # Optional: Authentication field
+                user["Authentication"] = row[4] if len(row) > 4 else "no"
+                # Token used field (6th column, index 5)
+                user["token_used"] = row[5] if len(row) > 5 else "0"
+                users.append(user)
     return JSONResponse({"success": True, "users": users})
 
 @app.post("/update_authentication")
@@ -278,28 +356,32 @@ async def update_authentication(data: dict):
     csv_path = os.path.join("Database", "users.csv")
     if not os.path.exists(csv_path):
         return JSONResponse({"success": False, "message": "User database not found."}, status_code=404)
-    users = []
+    rows = []
     updated = False
     with open(csv_path, "r", newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        fieldnames = reader.fieldnames
-        # Support both lower-case and capitalized username field
-        if "Authentication" not in fieldnames:
-            fieldnames = fieldnames + ["Authentication"]
-        for row in reader:
-            row_username = row.get("username", "") or row.get("Username", "")
-            if row_username == username:
-                row["Authentication"] = auth_value
+        reader = csv.reader(f)
+        all_rows = list(reader)
+        # Detect header
+        header_keywords = ['user', 'email', 'contact', 'auth', 'token']
+        is_header = any(any(key in cell.lower() for key in header_keywords) for cell in all_rows[0]) if all_rows else False
+        header = all_rows[0] if is_header else None
+        data_rows = all_rows[1:] if is_header else all_rows
+        for row in data_rows:
+            if len(row) >= 1 and row[0] == username:
+                # Ensure row has at least 6 columns (username, email, contact, password, Authentication, token_used)
+                while len(row) < 7:
+                    row.append("0" if len(row) == 5 else "")
+                row[4] = auth_value
                 updated = True
-            if "Authentication" not in row:
-                row["Authentication"] = "no"
-            users.append(row)
+            rows.append(row)
     if not updated:
         return JSONResponse({"success": False, "message": "User not found."}, status_code=404)
+    # Write back to CSV
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(users)
+        writer = csv.writer(f)
+        if header:
+            writer.writerow(header)
+        writer.writerows(rows)
     return JSONResponse({"success": True, "message": "Authentication updated."})
 
 @app.get("/admin_logout")

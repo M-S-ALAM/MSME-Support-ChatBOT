@@ -13,7 +13,17 @@ function login(event) {
     },
     body: JSON.stringify({ username: user, password: pass })
   })
-    .then(response => response.json())
+    .then(response => {
+      // Always try to parse JSON, even for error responses
+      return response.json().then(data => {
+        if (!response.ok) {
+          throw new Error(data.message || "Login failed.");
+        }
+        return data;
+      }).catch(() => {
+        throw new Error("Login failed.");
+      });
+    })
     .then(data => {
       if (data.success) {
         // Store JWT access token in localStorage for authenticated requests
@@ -26,8 +36,8 @@ function login(event) {
         if (errorDiv) errorDiv.textContent = "❌ " + (data.message || "Invalid username or password.");
       }
     })
-    .catch(() => {
-      if (errorDiv) errorDiv.textContent = "❌ An error occurred during login.";
+    .catch((err) => {
+      if (errorDiv) errorDiv.textContent = "❌ " + (err.message || "An error occurred during login.");
     });
 
   return false; // Prevent default form submission

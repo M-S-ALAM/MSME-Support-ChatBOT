@@ -149,7 +149,7 @@
       }
 
       // Ensure signup form sends all required fields with correct keys
-      window.signup = function(event) {
+      window.signup = async function(event) {
         event.preventDefault();
         const username = document.getElementById('signup-username').value.trim();
         const email = document.getElementById('email_id').value.trim();
@@ -163,34 +163,32 @@
           return false;
         }
 
-        fetch("/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username: username,
-            email: email,
-            contact_number: contact_number,
-            password: password
-          })
-        })
-        .then(async res => {
-          let data;
+        try {
+          const res = await fetch("/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username: username,
+              email: email,
+              contact_number: contact_number,
+              password: password
+            })
+          });
+          let data = {};
           try {
             data = await res.json();
           } catch (e) {
             errorDiv.textContent = "❌ Server error: Invalid response.";
-            return;
+            return false;
           }
           if (res.ok && data.success) {
             window.location.href = "/";
           } else {
             errorDiv.textContent = "❌ " + (data && data.message ? data.message : "Signup failed.");
           }
-        })
-        .catch(() => {
+        } catch (e) {
           errorDiv.textContent = "❌ Signup failed. Please try again.";
-        });
-
+        }
         return false;
       };
     });
