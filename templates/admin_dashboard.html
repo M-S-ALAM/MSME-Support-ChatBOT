@@ -5,6 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="/static/styles/admin_dashboard.css" />
+  <style>
+    .auth-select {
+      font-size: 1.1em;
+      padding: 8px 18px;
+      border-radius: 6px;
+      border: 2px solid #3f51b5;
+      background: linear-gradient(90deg, #e3f0ff 0%, #fbeee6 100%);
+      color: #232f3e;
+      font-weight: bold;
+      min-width: 130px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+      outline: none;
+      margin: 0 0 0 2px;
+    }
+    .auth-select:focus {
+      border-color: #febd69;
+      box-shadow: 0 0 0 2px #febd6955;
+    }
+    .auth-select option[value="Verified"] {
+      background: #d4edda;
+      color: #155724;
+      font-weight: bold;
+    }
+    .auth-select option[value="Pending"] {
+      background: #fff3cd;
+      color: #856404;
+      font-weight: bold;
+    }
+    .auth-select option[value="Rejected"] {
+      background: #f8d7da;
+      color: #721c24;
+      font-weight: bold;
+    }
+    .auth-select option[value="Blocked"] {
+      background: #d1ecf1;
+      color: #0c5460;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <div class="dashboard-container">
@@ -13,7 +53,9 @@
       <img src="/static/img/msme.jpg" alt="Admin Logo" class="logo" />
       <div class="header-title">
         <h1>Welcome, Admin!</h1>
-        <p>You have successfully logged in to the Admin Dashboard.</p>
+        <p style="color:#3f51b5; font-size:1.2em; font-weight:600;">
+          You have successfully logged in to the Admin Dashboard.
+        </p>
       </div>
       <a href="/admin_logout" class="logout-link">Logout</a>
     </div>
@@ -29,11 +71,13 @@
             <th>Email</th>
             <th>Contact Number</th>
             <th>Authentication</th>
+            <th>Token used</th>
           </tr>
         </thead>
         <tbody>
           <!-- User rows will be dynamically inserted here -->
         </tbody>
+        
       </table>
     </div>
   </div>
@@ -62,6 +106,7 @@
                     <option value="Blocked" ${(user.Authentication === "Blocked") ? "selected" : ""}>Blocked</option>
                   </select>
                 </td>
+                <td>${user.token_used || user["token_used"] || ""}</td>
               `;
               tbody.appendChild(tr);
             });
@@ -90,13 +135,13 @@
 
           } else {
             const tr = document.createElement("tr");
-            tr.innerHTML = `<td colspan="4" style="color:red;">No user data found.</td>`;
+            tr.innerHTML = `<td colspan="5" style="color:red;">No user data found.</td>`;
             tbody.appendChild(tr);
           }
         })
         .catch(err => {
           const tbody = document.querySelector("#user-table tbody");
-          tbody.innerHTML = `<tr><td colspan="4" style="color:red;">Failed to load user data.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="5" style="color:red;">Failed to load user data.</td></tr>`;
           console.error("Error fetching user data:", err);
         });
     });
