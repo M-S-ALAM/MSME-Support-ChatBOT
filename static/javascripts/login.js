@@ -31,7 +31,12 @@ function login(event) {
           localStorage.setItem("access_token", data.access_token);
         }
         localStorage.setItem("authenticated", "true");
-        window.location.href = "/chat";
+        // Use redirect_url from backend if present, else fallback to /chat
+        if (data.redirect_url) {
+          window.location.replace(data.redirect_url);
+        } else {
+          window.location.replace("/chat");
+        }
       } else {
         if (errorDiv) errorDiv.textContent = "❌ " + (data.message || "Invalid username or password.");
       }

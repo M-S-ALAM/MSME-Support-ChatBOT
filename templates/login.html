@@ -179,7 +179,7 @@
                   localStorage.setItem("access_token", data.access_token);
                 }
                 localStorage.setItem("authenticated", "true");
-                // Use location.replace to ensure navigation
+                // Always redirect to /chat after successful login
                 window.location.replace("/chat");
               } else {
                 if (errorDiv) errorDiv.textContent = "❌ " + (data.message || "Invalid username or password.");
