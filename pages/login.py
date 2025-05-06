@@ -1,3 +1,16 @@
+"""
+This module defines the routes and utilities for the login section of the application.
+============================================================================================
+Login page routes for FastAPI application.
+
+Routes:
+- GET /: Render the login page.
+- POST /login: Authenticate user and set access token cookie.
+
+Utilities:
+- Uses bcrypt for password verification and jwtsign.sign_token for JWT creation.
+"""
+
 from fastapi import APIRouter, Request, status
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
@@ -11,10 +24,16 @@ templates = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
 async def login_page(request: Request):
+    """
+    Render the login page.
+    """
     return templates.TemplateResponse("login.html", {"request": request})
 
 @router.post("/login")
 async def login_user(request: Request):
+    """
+    Authenticate user credentials and set JWT cookie if successful.
+    """
     try:
         data = await request.json()
         username = data.get("username", "").strip()

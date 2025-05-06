@@ -1,3 +1,16 @@
+"""
+This module contains the routes for the signup page of the FastAPI application.
+============================================================================================
+Signup page routes for FastAPI application.
+
+Routes:
+- GET /signup: Render the signup page.
+- POST /signup: Register a new user and store in CSV.
+
+Utilities:
+- Uses bcrypt for password hashing.
+"""
+
 from fastapi import APIRouter, Request, status
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
@@ -10,10 +23,16 @@ templates = Jinja2Templates(directory="templates")
 
 @router.get("/signup", response_class=HTMLResponse)
 async def signup_page(request: Request):
+    """
+    Render the signup page.
+    """
     return templates.TemplateResponse("signup.html", {"request": request})
 
 @router.post("/signup")
 async def signup_user(request: Request):
+    """
+    Register a new user, check for duplicates, and store in CSV.
+    """
     try:
         data = await request.json()
     except Exception:

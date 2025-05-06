@@ -1,3 +1,15 @@
+"""
+Forgot password routes for FastAPI application.
+
+Routes:
+- GET /forgot_password: Render the forgot password page.
+- POST /send_verification_code: Send a verification code to the user's email.
+- POST /forgot-password: Reset the user's password after verification.
+
+Utilities:
+- verification_codes: In-memory store for verification codes (for demo only).
+"""
+
 from fastapi import APIRouter, Request, Form, status
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
@@ -12,10 +24,16 @@ verification_codes = {}
 
 @router.get("/forgot_password", response_class=HTMLResponse)
 async def forgot_password_page(request: Request):
+    """
+    Render the forgot password page.
+    """
     return templates.TemplateResponse("forgot_password.html", {"request": request})
 
 @router.post("/send_verification_code")
 async def send_verification_code(data: dict):
+    """
+    Send a verification code to the user's email if username and email match.
+    """
     username = data.get("username")
     email = data.get("email")
     if not username or not email:
@@ -52,6 +70,9 @@ async def forgot_password(
     verification_code: str = Form(...),
     new_password: str = Form(...),
 ):
+    """
+    Reset the user's password after verifying the code.
+    """
     csv_path = os.path.join("Database", "users.csv")
     if not os.path.exists(csv_path):
         return JSONResponse({"success": False, "message": "User database not found."}, status_code=404)
