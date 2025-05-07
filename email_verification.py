@@ -1,56 +1,77 @@
-import smtplib
-from email.message import EmailMessage
 import os
 from dotenv import load_dotenv
+load_dotenv()  # <-- Make sure this is before any os.getenv calls
 
-# Load environment variables from .env file
-load_dotenv()
+from fastapi import FastAPI, Request, HTTPException, Body
+from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
+from pydantic import BaseModel, EmailStr
+from itsdangerous import URLSafeTimedSerializer
+from typing import List
 
-class SendEmailVerify:
-    @staticmethod
-    def send_verify(recipient_email: str, token: str):
-        """
-        Sends an email with a verification link to the given recipient.
-        """
-        email_address = os.getenv("EMAIL_USER")
-        email_password = os.getenv("EMAIL_PASS")
+app = FastAPI()
 
-        if not email_address or not email_password:
-            raise EnvironmentError("❌ EMAIL_USER or EMAIL_PASS not set in the environment variables.")
+# Configuration for sending emails
+conf = ConnectionConfig(
+    MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
+    MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
+    MAIL_FROM=os.getenv("MAIL_FROM"),
+    MAIL_PORT=int(os.getenv("MAIL_PORT", 587)),
+    MAIL_SERVER=os.getenv("MAIL_SERVER"),
+    MAIL_STARTTLS=os.getenv("MAIL_STARTTLS", "True") == "True",
+    MAIL_SSL_TLS=os.getenv("MAIL_SSL_TLS", "False") == "True",
+    USE_CREDENTIALS=True
+)
 
-        if "@" not in recipient_email:
-            raise ValueError("❌ Provided recipient email is not valid.")
+# Model for email input
+class EmailSchema(BaseModel):
+    email: List[EmailStr]
 
-        # Create the email message
-        msg = EmailMessage()
-        msg['Subject'] = "Verify Your Account"
-        msg['From'] = email_address
-        msg['To'] = recipient_email
-        msg.set_content(
-            f"""\
-Hi,
+# Secret key for token generation
+SECRET_KEY = "your_secret_key" # Change to a secure, random value
 
-Please verify your account by clicking the link below:
+# Function to generate verification token
+def generate_token(email):
+    serializer = URLSafeTimedSerializer(SECRET_KEY)
+    return serializer.dumps(email, salt='email-verification')
 
-http://localhost:8080/user/verify/{token}
+# Function to verify token
+def verify_token(token):
+    serializer = URLSafeTimedSerializer(SECRET_KEY)
+    try:
+        email = serializer.loads(token, salt='email-verification', max_age=3600) # Token valid for 1 hour
+        return email
+    except Exception as e:
+        return None
 
-If you didn't request this, please ignore this email.
+# Endpoint to request email verification
+@app.post("/email/verification")
+async def send_verification_email(email_data: EmailSchema = Body(...), request: Request = None):
+    email = email_data.email[0]
+    token = generate_token(email)
+    verification_link = f"{request.base_url}verify-email?token={token}"
 
-Thanks,
-Your Team
-"""
-        )
+    message = MessageSchema(
+        subject="Email Verification",
+        recipients=email_data.email,
+        body=f"""
+        Please click the link below to verify your email:<br>
+        <a href="{verification_link}">{verification_link}</a>
+        """,
+        subtype="html"
+    )
 
-        try:
-            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                smtp.login(email_address, email_password)
-                smtp.send_message(msg)
-                print(f"✅ Verification email sent to {recipient_email}")
-        except smtplib.SMTPAuthenticationError:
-            print("❌ SMTP Authentication Error. Check your email/password or use an App Password.")
-        except Exception as e:
-            print(f"❌ Failed to send email: {e}")
+    fm = FastMail(conf)
+    try:
+        await fm.send_message(message)
+        return {"message": "Verification email sent"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to send email: {e}")
 
-# Example usage
-if __name__ == "__main__":
-    SendEmailVerify.send_verify("msalamiitd@gmail.com", "test_token")
+# Endpoint to verify email
+@app.get("/verify-email")
+async def verify_email(token: str):
+    email = verify_token(token)
+    if email:
+        return {"message": f"Email {email} verified successfully!"}
+    else:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")

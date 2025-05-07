@@ -58,6 +58,14 @@ html, body {
   border-radius: 8px;
 }
 
+.form-fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Increased gap for more space between boxes */
+  margin-bottom: 10px; /* Optional: adds space below the group */
+}
+
 /* Button */
 .login-container button {
   width: 100%;

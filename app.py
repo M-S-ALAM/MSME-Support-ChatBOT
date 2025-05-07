@@ -24,9 +24,13 @@ def get_current_user_from_cookie(request: Request):
     if not token:
         return None
     try:
+        # Print the secret key for debugging
+        print("JWT decode using SECRET_KEY:", SECRET_KEY)
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        return payload.get("sub")
-    except JWTError:
+        print("JWT payload:", payload)
+        return payload.get("email")
+    except Exception as e:
+        print("JWT decode error:", e)
         return None
 
 # Helper to check admin session (very basic, for demonstration)
@@ -144,9 +148,9 @@ async def login_user(request: Request):
                                         "success": True,
                                         "message": "Login successful.",
                                         "access_token": token,
-                                        "token_type": "bearer"
+                                        "token_type": "bearer",
+                                        "redirect_url": "/chat"
                                     })
-                                    # Set SameSite and Secure for better browser compatibility
                                     response.set_cookie(
                                         key="access_token",
                                         value=token,
@@ -179,10 +183,14 @@ async def login_user(request: Request):
 
 @app.get("/chat", response_class=HTMLResponse)
 async def chat_page(request: Request):
+    print("Cookies:", request.cookies)
     user = get_current_user_from_cookie(request)
+    print("Decoded user:", user)
     if not user:
-        return RedirectResponse(url="/", status_code=302)
-    return templates.TemplateResponse("chat.html", {"request": request})
+        response = RedirectResponse(url="/", status_code=302)
+        response.delete_cookie("access_token")
+        return response
+    return templates.TemplateResponse("chat.html", {"request": request, "user": user})
 
 @app.post("/get")
 async def get_bot_response(data: dict = Body(...)):

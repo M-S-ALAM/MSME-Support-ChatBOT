@@ -1,7 +1,25 @@
+document.addEventListener("DOMContentLoaded", function() {
+  // Password show/hide toggle for signup
+  const pwdInput = document.getElementById('signup-password');
+  const toggle = document.getElementById('toggleSignupPassword');
+  if (toggle && pwdInput) {
+    toggle.addEventListener('click', function() {
+      if (pwdInput.type === "password") {
+        pwdInput.type = "text";
+        toggle.textContent = "🙈";
+      } else {
+        pwdInput.type = "password";
+        toggle.textContent = "👁️";
+      }
+    });
+  }
+});
+
 function signup(event) {
   if (event) event.preventDefault();
   const username = document.getElementById("signup-username").value.trim();
   const email = document.getElementById("email_id").value.trim();
+  const mobile = document.getElementById("mobile").value.trim();
   const password = document.getElementById("signup-password").value.trim();
   const errorDiv = document.getElementById("signup-error-message");
 
@@ -9,8 +27,12 @@ function signup(event) {
   if (errorDiv) errorDiv.textContent = "";
 
   // Basic validation
-  if (!username || !email || !password) {
+  if (!username || !email || !mobile || !password) {
     if (errorDiv) errorDiv.textContent = "❌ All fields are required.";
+    return false;
+  }
+  if (!/^\d{10}$/.test(mobile)) {
+    if (errorDiv) errorDiv.textContent = "❌ Enter a valid 10-digit mobile number.";
     return false;
   }
 
@@ -19,7 +41,7 @@ function signup(event) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ username, email, password })
+    body: JSON.stringify({ username, email, mobile, password })
   })
     .then(response => response.json())
     .then(data => {
