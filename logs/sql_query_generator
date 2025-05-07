@@ -955,3 +955,4 @@ FROM Customer;
 2025-05-07 01:01:19,088 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-05-07 09:53:44,583 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-05-07 10:00:15,740 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-07 12:15:35,779 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
