@@ -33,6 +33,7 @@ async def login_page(request: Request):
 async def login_user(request: Request):
     """
     Authenticate user credentials and set JWT cookie if successful.
+    Only allow login if status is 'Verified'. Otherwise, return a message based on status.
     """
     try:
         data = await request.json()
@@ -54,27 +55,36 @@ async def login_user(request: Request):
                     row_username = (row.get("username") or row.get("Username") or (vals[0] if len(vals) > 0 else "")).strip().lower()
                     row_password_hash = row.get("password") or row.get("Password") or (vals[3] if len(vals) > 3 else "")
                     row_email = row.get("email") or row.get("Email") or (vals[1] if len(vals) > 1 else "")
+                    row_status = (row.get("status") or row.get("Status") or (vals[4] if len(vals) > 4 else "")).strip()
                     if not row_username or not row_password_hash:
                         continue
                     try:
                         if row_username == username.lower() and row_password_hash:
                             if bcrypt.checkpw(password.encode("utf-8"), row_password_hash.encode("utf-8")):
-                                token = sign_token(row_email)
-                                response = JSONResponse({
-                                    "success": True,
-                                    "message": "Login successful.",
-                                    "access_token": token,
-                                    "token_type": "bearer",
-                                    "redirect_url": "/chat"
-                                })
-                                response.set_cookie(
-                                    key="access_token",
-                                    value=token,
-                                    httponly=True,
-                                    path="/",
-                                    samesite="lax"
-                                )
-                                return response
+                                if row_status == "Verified":
+                                    token = sign_token(row_email)
+                                    response = JSONResponse({
+                                        "success": True,
+                                        "message": "Login successful.",
+                                        "access_token": token,
+                                        "token_type": "bearer",
+                                        "redirect_url": "/chat"
+                                    })
+                                    response.set_cookie(
+                                        key="access_token",
+                                        value=token,
+                                        httponly=True,
+                                        path="/",
+                                        samesite="lax"
+                                    )
+                                    return response
+                                else:
+                                    status_message = {
+                                        "Pending": "Your account is pending verification. Please wait for approval.",
+                                        "Rejected": "Your account has been rejected. Please contact support.",
+                                    }
+                                    msg = status_message.get(row_status, f"Your account status is '{row_status}'. Login not allowed.")
+                                    return JSONResponse({"success": False, "message": msg}, status_code=status.HTTP_403_FORBIDDEN)
                     except Exception:
                         continue
             except Exception:

@@ -52,26 +52,18 @@ async def update_authentication(data: dict):
     rows = []
     updated = False
     with open(csv_path, "r", newline="", encoding="utf-8") as f:
-        reader = csv.reader(f)
-        all_rows = list(reader)
-        # Detect header
-        header_keywords = ['user', 'email', 'contact', 'auth', 'token']
-        is_header = any(any(key in str(cell).lower() for key in header_keywords) for cell in all_rows[0]) if all_rows else False
-        header = all_rows[0] if is_header else None
-        data_rows = all_rows[1:] if is_header else all_rows
-        for row in data_rows:
-            if len(row) >= 1 and row[0] == username:
-                while len(row) < 7:
-                    row.append("0" if len(row) == 5 else "")
-                row[4] = auth_value
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        for row in reader:
+            if row.get("username") == username:
+                row["status"] = auth_value
                 updated = True
             rows.append(row)
     if not updated:
         return JSONResponse({"success": False, "message": "User not found."}, status_code=404)
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        if header:
-            writer.writerow(header)
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
         writer.writerows(rows)
     return JSONResponse({"success": True, "message": "Authentication updated."})
 

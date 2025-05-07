@@ -6,4 +6,4 @@
 # If you encounter issues, consider running:
 # pip install 'pyasn1<0.7.0,>=0.6.1'
 
-uvicorn app:app --reload
+uvicorn main:app --reload

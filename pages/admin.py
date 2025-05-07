@@ -7,6 +7,7 @@ Routes:
 - GET /admin: Render the admin login page.
 - GET /admin_dashboard: Render the admin dashboard (requires admin session).
 - GET /admin_users: Return a list of users for admin (requires admin session).
+- POST /admin_login: Handle admin login.
 - GET /admin_logout: Logout admin and clear session cookie.
 
 Utilities:
@@ -47,35 +48,38 @@ async def admin_dashboard(request: Request):
 @router.get("/admin_users")
 async def admin_users(request: Request):
     """
-    Return a list of users for the admin dashboard.
+    Return a list of users for admin (requires admin session).
     """
     if not is_admin_logged_in(request):
         return JSONResponse({"success": False, "message": "Unauthorized"}, status_code=401)
-    csv_path = os.path.join("Database", "users.csv")
     users = []
+    csv_path = os.path.join("Database", "users.csv")
     if os.path.exists(csv_path):
         with open(csv_path, "r", newline="", encoding="utf-8") as f:
-            reader = csv.reader(f)
-            rows = list(reader)
-            if not rows:
-                return JSONResponse({"success": True, "users": []})
-            header_keywords = ['user', 'email', 'contact', 'auth']
-            is_header = any(any(key in str(cell).lower() for key in header_keywords) for cell in rows[0])
-            data_rows = rows[1:] if is_header else rows
-            for row in data_rows:
-                if not any(row):
-                    continue
-                user = {}
-                if len(row) >= 1:
-                    user["username"] = row[0]
-                if len(row) >= 2:
-                    user["email"] = row[1]
-                if len(row) >= 3:
-                    user["contact_number"] = row[2]
-                user["Authentication"] = row[4] if len(row) > 4 else "no"
-                user["token_used"] = row[5] if len(row) > 5 else "0"
-                users.append(user)
+            reader = csv.DictReader(f)
+            for row in reader:
+                users.append(row)
     return JSONResponse({"success": True, "users": users})
+
+@router.post("/admin_login")
+async def admin_login(request: Request):
+    """
+    Handle admin login.
+    """
+    data = await request.json()
+    username = data.get("username")
+    password = data.get("password")
+    ADMIN_USERNAME = "gyandata"
+    ADMIN_PASSWORD = "gyandata"  # Change this to your desired admin password
+
+    if not username or not password:
+        return JSONResponse({"success": False, "message": "All fields are required."}, status_code=400)
+    if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+        response = JSONResponse({"success": True, "message": "Admin login successful.", "redirect_url": "/admin_dashboard"})
+        response.set_cookie(key="admin_logged_in", value="true", httponly=True)
+        return response
+    else:
+        return JSONResponse({"success": False, "message": "Invalid admin credentials."}, status_code=401)
 
 @router.get("/admin_logout")
 async def admin_logout():

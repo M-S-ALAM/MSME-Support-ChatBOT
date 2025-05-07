@@ -97,11 +97,11 @@
               tr.innerHTML = `
                 <td>${user.username || user.Username || ""}</td>
                 <td>${user.email || user.Email || ""}</td>
-                <td>${user.contact_number || user["Contact Number"] || ""}</td>
+                <td>${user.contact_number || user.mobile || ""}</td>
                 <td>
                   <select class="auth-select" data-username="${user.username || user.Username || ""}">
-                    <option value="Verified" ${(user.Authentication === "Verified") ? "selected" : ""}>Verified</option>
                     <option value="Pending" ${(user.Authentication === "Pending") ? "selected" : ""}>Pending</option>
+                    <option value="Verified" ${(user.Authentication === "Verified") ? "selected" : ""}>Verified</option>
                     <option value="Rejected" ${(user.Authentication === "Rejected") ? "selected" : ""}>Rejected</option>
                     <option value="Blocked" ${(user.Authentication === "Blocked") ? "selected" : ""}>Blocked</option>
                   </select>

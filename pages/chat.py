@@ -16,6 +16,7 @@ from fastapi import APIRouter, Request, Body
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from inference import LLMChatBot  # Ensure this is the correct import for your chatbot
+from jwtsign import decode_token  # Make sure this exists or use your JWT decode function
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -25,13 +26,18 @@ chatbot = LLMChatBot()
 
 def get_current_user_from_cookie(request: Request):
     """
-    Retrieve the current user from the JWT access_token cookie.
-    (For demonstration, just returns the token. Replace with JWT decode logic for production.)
+    Retrieve and validate the current user from the JWT access_token cookie.
+    Returns user info if valid, else None.
     """
     token = request.cookies.get("access_token")
     if not token:
         return None
-    return token
+    try:
+        # Replace with your actual JWT decode/validation logic
+        user_info = decode_token(token)
+        return user_info
+    except Exception:
+        return None
 
 @router.get("/chat", response_class=HTMLResponse)
 async def chat_page(request: Request):

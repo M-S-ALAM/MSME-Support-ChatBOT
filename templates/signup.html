@@ -117,9 +117,15 @@
             👁️
           </span>
         </div>
-        <button type="submit">Signup</button>
+        <button type="button" id="sendSignupOtpBtn">Send Verification Code</button>
+        <div id="otpBox" style="display:none;">
+          <input type="text" id="signup_verification_code" name="signup_verification_code" placeholder="Verification Code" />
+          <button type="button" id="verifySignupOtpBtn">Verify OTP</button>
+        </div>
+        <button type="submit" id="signupSubmitBtn" style="display:none;">Signup</button>
       </div>
       <div id="signup-error-message" style="color: red; margin-top: 10px;"></div>
+      <div id="signup-success-message" style="color: green; margin-top: 10px;"></div>
     </form>
     <p class="bottom-text">
       Already have an account? <a href="/">Login here</a>
@@ -136,6 +142,16 @@
     document.addEventListener("DOMContentLoaded", function() {
       const pwdInput = document.getElementById('signup-password');
       const toggle = document.getElementById('toggleSignupPassword');
+      const sendOtpBtn = document.getElementById('sendSignupOtpBtn');
+      const verifyOtpBtn = document.getElementById('verifySignupOtpBtn');
+      const otpInput = document.getElementById('signup_verification_code');
+      const signupSubmitBtn = document.getElementById('signupSubmitBtn');
+      const usernameInput = document.getElementById('signup-username');
+      const emailInput = document.getElementById('email_id');
+      const contactInput = document.getElementById('contact_number');
+      const errorDiv = document.getElementById('signup-error-message');
+      const successDiv = document.getElementById('signup-success-message');
+
       if (toggle && pwdInput) {
         toggle.addEventListener('click', function() {
           if (pwdInput.type === "password") {
@@ -148,15 +164,96 @@
         });
       }
 
-      // Ensure signup form sends all required fields with correct keys
+      sendOtpBtn.addEventListener('click', async function() {
+        errorDiv.textContent = "";
+        successDiv.textContent = "";
+        const username = usernameInput.value.trim();
+        const email = emailInput.value.trim();
+        const contact = contactInput.value.trim();
+        const password = pwdInput.value.trim();
+        if (!username || !email || !contact || !password) {
+          errorDiv.textContent = "All fields are required before sending OTP.";
+          return;
+        }
+        sendOtpBtn.disabled = true;
+        sendOtpBtn.textContent = "Sending...";
+        try {
+          const res = await fetch("/send_verification_code", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, contact_number: contact, signup: true })
+          });
+          const data = await res.json();
+          if (data.success) {
+            successDiv.textContent = "Verification code sent to your email.";
+            document.getElementById('otpBox').style.display = "";
+            otpInput.value = "";
+            otpInput.readOnly = false;
+            otpInput.required = true;
+            sendOtpBtn.style.display = "none";
+            verifyOtpBtn.style.display = "";
+            signupSubmitBtn.style.display = "none";
+          } else {
+            errorDiv.textContent = data.message || "Failed to send code.";
+            sendOtpBtn.disabled = false;
+            sendOtpBtn.textContent = "Send Verification Code";
+          }
+        } catch (err) {
+          errorDiv.textContent = "Error sending code.";
+          sendOtpBtn.disabled = false;
+          sendOtpBtn.textContent = "Send Verification Code";
+        }
+      });
+
+      verifyOtpBtn.addEventListener('click', async function() {
+        errorDiv.textContent = "";
+        successDiv.textContent = "";
+        const email = emailInput.value.trim();
+        const otp = otpInput.value.trim();
+        if (!otp) {
+          errorDiv.textContent = "Please enter the verification code.";
+          return;
+        }
+        verifyOtpBtn.disabled = true;
+        verifyOtpBtn.textContent = "Verifying...";
+        try {
+          const res = await fetch("/verify_otp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, otp, signup: true })
+          });
+          const data = await res.json();
+          if (data.success) {
+            successDiv.textContent = "OTP verified. You can now complete signup.";
+            signupSubmitBtn.style.display = "";
+            verifyOtpBtn.style.display = "none";
+            otpInput.readOnly = true;
+          } else {
+            errorDiv.textContent = data.message || "OTP verification failed.";
+            verifyOtpBtn.disabled = false;
+            verifyOtpBtn.textContent = "Verify OTP";
+          }
+        } catch (err) {
+          errorDiv.textContent = "Error verifying OTP.";
+          verifyOtpBtn.disabled = false;
+          verifyOtpBtn.textContent = "Verify OTP";
+        }
+      });
+
+      // Only allow signup after OTP verified
       window.signup = async function(event) {
         event.preventDefault();
-        const username = document.getElementById('signup-username').value.trim();
-        const email = document.getElementById('email_id').value.trim();
-        const contact_number = document.getElementById('contact_number').value.trim();
-        const password = document.getElementById('signup-password').value.trim();
-        const errorDiv = document.getElementById('signup-error-message');
+        if (signupSubmitBtn.style.display === "none") {
+          errorDiv.textContent = "Please verify OTP before signing up.";
+          return false;
+        }
+        const username = usernameInput.value.trim();
+        const email = emailInput.value.trim();
+        const contact_number = contactInput.value.trim();
+        const password = pwdInput.value.trim();
+        const otp = otpInput.value.trim();
         errorDiv.textContent = "";
+        successDiv.textContent = "";
 
         if (!username || !email || !contact_number || !password) {
           errorDiv.textContent = "❌ All fields are required.";
