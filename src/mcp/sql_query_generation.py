@@ -1,13 +1,18 @@
 """
-This module generates SQL queries from natural language using an LLM client (default: OpenAI's GPT-4).
+SQL Query Generation Module
+===============================================================================
+SQL Query Generation: This module generates SQL queries from natural language using an LLM client (default: OpenAI's GPT-4).
 It takes a natural language query and a dictionary of table schemas as input,
 and returns the corresponding SQL query.
 MCP Format: Modular, Configurable, Pluggable.
 """
 import re
+import os
 import logging
 from openai import OpenAI, OpenAIError
 from src.utils.constant import OpenAIConfig, Constants, DbSqlAlchemyConstant
+
+
 
 class SQLQueryGenerator:
     """

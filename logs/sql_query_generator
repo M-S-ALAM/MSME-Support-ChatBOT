@@ -956,3 +956,17 @@ FROM Customer;
 2025-05-07 09:53:44,583 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-05-07 10:00:15,740 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-05-07 12:15:35,779 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 10:10:19,279 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 10:22:09,312 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employees are in database
+2025-05-08 10:22:09,941 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-05-08 10:25:58,302 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 10:26:21,871 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 10:26:42,765 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-05-08 10:26:43,544 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) FROM Employee;
+2025-05-08 11:58:55,915 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 11:59:15,459 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-05-08 11:59:16,312 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) FROM Employee;
+2025-05-08 12:04:56,214 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:05:08,809 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:05:28,161 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-05-08 12:05:28,945 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;

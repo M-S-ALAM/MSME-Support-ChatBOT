@@ -39,12 +39,12 @@ os.makedirs(log_dir, exist_ok=True)
 # Utility Functions
 # -------------------------------------------------------------------------
 def get_llm_response(query, value):
-    prompt = f"The user asked: '{query}'. The result from the database is '{value}'. Provide a simple summary."
+    prompt = f"The user asked: '{query}'. The result from the database is '{value}'. Provide a simple summary in plain english"
     try:
         response = llm_client.chat.completions.create(
             model=OpenAIConfig.OpenAI_model,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant providing insights based on database query results."},
+                {"role": "system", "content": "You are a helpful assistant providing insights based on database query results. Expect the user is non technical."},
                 {"role": "user", "content": prompt}
             ],
             max_tokens=OpenAIConfig.OpenAI_max_tokens,
