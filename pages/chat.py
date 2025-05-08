@@ -17,12 +17,14 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from inference import LLMChatBot  # Ensure this is the correct import for your chatbot
 from jwtsign import decode_token  # Make sure this exists or use your JWT decode function
+from src.mcp.generate_plot import VisualizationEngine, remove_sensitive_columns
+from tabulate import tabulate
+import pandas as pd
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 chatbot = LLMChatBot()
-# Make sure chatbot is defined/imported above
-# Example: from chatbot_module import chatbot
+visualization = VisualizationEngine()
 
 def get_current_user_from_cookie(request: Request):
     """
@@ -62,21 +64,54 @@ async def logout():
 async def get_chat_response(request: Request, data: dict = Body(...)):
     """
     Endpoint for POST /get.
-    Replace this logic with your actual chat response logic.
+    Enhanced to handle SQL, DataFrame, and visualization output.
     """
     user = get_current_user_from_cookie(request)
     if not user:
         return {"success": False, "message": "Unauthorized"}, 401
 
     user_msg = data.get("msg", "")
-    # Use your inference logic to get the bot reply
-    # Make sure chatbot is defined/imported above
-    _, result = chatbot.run(user_msg)
-    if isinstance(result, dict) and "message" in result:
-        return {"reply": result["message"]}
-    elif isinstance(result, dict) and "error" in result:
-        return {"reply": result["error"]}
-    elif hasattr(result, "to_string"):
-        return {"reply": result.to_string()}
-    else:
-        return {"reply": str(result)}
+    sql_query, result = chatbot.run(user_msg)
+
+    # Handle error or message responses
+    if sql_query == 'N/A' or result is None:
+        if isinstance(result, dict) and "message" in result:
+            return {"reply": result["message"], "sql": sql_query}
+        else:
+            return {"reply": "⚠️ Could not process the input.", "sql": sql_query}
+
+    if isinstance(result, dict):
+        if "error" in result:
+            return {"reply": f"❌ Error: {result['error']}", "sql": sql_query}
+        elif "message" in result:
+            return {"reply": result["message"], "sql": sql_query}
+
+    # Handle DataFrame results
+    if isinstance(result, pd.DataFrame):
+        clean_result = remove_sensitive_columns(result)
+        output_type = visualization.suggest_output_type(clean_result, user_msg)
+
+        if output_type == 'text':
+            # Optionally, implement get_llm_response if available
+            # summary = get_llm_response(user_msg, clean_result.to_dict())
+            summary = "📝 Insight summary not implemented."
+            return {"reply": summary, "sql": sql_query}
+
+        elif output_type == 'table':
+            table_str = tabulate(clean_result, headers='keys', tablefmt='pretty')
+            return {
+                "reply": "📋 Table Output:\n" + table_str,
+                "sql": sql_query
+            }
+
+        elif output_type == 'plot':
+            # Plots can't be sent via JSON; indicate to frontend
+            return {
+                "reply": "📊 Plot output generated. (Plot display not supported in API response.)",
+                "sql": sql_query
+            }
+        else:
+            return {"reply": "⚠️ Unexpected output type.", "sql": sql_query}
+
+    # Fallback for unexpected result format
+    return {"reply": str(result), "sql": sql_query}

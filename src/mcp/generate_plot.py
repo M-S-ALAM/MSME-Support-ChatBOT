@@ -1,6 +1,6 @@
 """
 VisualizationEngine Module
-===============================
+=====================================================================================
 VisualizationEngine: A modular and configurable engine for generating data visualizations
 and suggesting output types based on user queries and pandas DataFrames.
 This class provides a flexible interface for integrating with various LLMs and plotting libraries,  
@@ -10,6 +10,19 @@ import pandas as pd
 from openai import OpenAI, OpenAIError
 from src.utils.constant import OpenAIConfig
 from typing import Optional, List, Any
+
+
+def remove_sensitive_columns(result):
+    columns_to_remove = {
+        "customer_id", "employee_id", "project_id", "department_id",
+        "invoice_id", "payment_id", "task_id", "time_entry_id"
+    }
+    if isinstance(result, pd.DataFrame):
+        return result.drop(columns=[col for col in columns_to_remove if col in result.columns], errors='ignore')
+    elif isinstance(result, list) and result and isinstance(result[0], dict):
+        return [{k: v for k, v in row.items() if k not in columns_to_remove} for row in result]
+    return result
+
 
 class VisualizationEngine:
     """
