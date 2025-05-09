@@ -92,15 +92,15 @@ async def get_chat_response(request: Request, data: dict = Body(...)):
         output_type = visualization.suggest_output_type(clean_result, user_msg)
 
         if output_type == 'text':
-            # Optionally, implement get_llm_response if available
-            # summary = get_llm_response(user_msg, clean_result.to_dict())
-            summary = "📝 Insight summary not implemented."
-            return {"reply": summary, "sql": sql_query}
+            # Implement get_llm_response if available
+            from inference import get_llm_response  # Ensure this function exists in your inference module
+            summary = get_llm_response(user_msg, clean_result.to_dict())
+            return {"reply":  summary, "sql": sql_query}
 
         elif output_type == 'table':
             table_str = tabulate(clean_result, headers='keys', tablefmt='pretty')
             return {
-                "reply": "📋 Table Output:\n" + table_str,
+                "reply": table_str,
                 "sql": sql_query
             }
 

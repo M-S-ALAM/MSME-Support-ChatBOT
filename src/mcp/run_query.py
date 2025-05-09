@@ -42,6 +42,10 @@ class DynamicDatabase:
             return
         self.engine = None
         self.db_path = os.path.join('Database', 'manufacturing_projects.db')
+        # Ensure the Database directory exists
+        db_dir = os.path.dirname(self.db_path)
+        if db_dir and not os.path.exists(db_dir):
+            os.makedirs(db_dir, exist_ok=True)
         self._initialized = True
 
     def connect(self):
