@@ -1,0 +1,49 @@
+2025-05-08 12:41:15,893 - __main__ - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 12:41:15,893 - __main__ - INFO - Natural Language Query: What is the total sales amount for each product?
+2025-05-08 12:41:17,029 - __main__ - INFO - Generated SQL Query: SELECT products.name, SUM(sales.amount) AS total_sales_amount
+FROM sales
+JOIN products ON sales.product_id = products.id
+GROUP BY products.name;
+2025-05-08 12:41:33,381 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 12:41:33,419 - sql_query_generation - INFO - Natural Language Query: Show me the sales trend over time
+2025-05-08 12:41:35,302 - sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 16:20:35,461 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 16:20:35,486 - sql_query_generation - INFO - Natural Language Query: Show me the sales trend over time
+2025-05-08 16:20:36,914 - sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 16:22:05,086 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 16:22:05,109 - sql_query_generation - INFO - Natural Language Query: Show me the sales trend over time
+2025-05-08 16:22:07,789 - sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 16:22:07,851 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 16:22:21,481 - src.codes.sql_query_generation - INFO - Natural Language Query: how maany employees are there
+2025-05-08 16:22:22,404 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) FROM Employee;
+2025-05-08 16:22:38,686 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-05-08 16:22:39,462 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-05-08 16:22:54,958 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employe in database
+2025-05-08 16:22:56,699 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-05-08 16:25:10,947 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 16:25:13,177 - sql_query_generation - INFO - Natural Language Query: hi
+2025-05-08 16:25:14,147 - sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 16:49:30,908 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 16:49:44,029 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 16:49:46,910 - sql_query_generation - INFO - Natural Language Query: hi
+2025-05-08 16:49:48,088 - sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 16:49:54,755 - sql_query_generation - INFO - Natural Language Query: hello
+2025-05-08 16:49:56,154 - sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 16:53:30,172 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 16:53:43,897 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-05-08 16:53:44,652 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) 
+FROM employees;
+2025-05-08 17:00:37,958 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 17:00:51,502 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-05-08 17:00:52,232 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) AS total_employees FROM employees;
+2025-05-08 20:48:43,877 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 20:48:58,550 - sql_query_generation - INFO - Natural Language Query: how many employees are their
+2025-05-08 20:48:59,449 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) 
+FROM employees;
+2025-05-08 22:14:43,429 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 22:15:00,697 - sql_query_generation - INFO - Natural Language Query: how many customer are in database
+2025-05-08 22:15:01,519 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(*) 
+FROM Customer;
+2025-05-08 22:18:21,621 - sql_query_generation - INFO - SQLQueryGenerator initialized with MCP format.
+2025-05-08 22:18:30,849 - sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-05-08 22:18:31,742 - sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;

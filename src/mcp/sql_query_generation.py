@@ -10,7 +10,7 @@ import re
 import os
 import logging
 from openai import OpenAI, OpenAIError
-from src.utils.constant import OpenAIConfig, Constants, DbSqlAlchemyConstant
+from src.utils.constant import OpenAIConfig, Constants, DbSqlAlchemyConstant, DBConstant
 
 
 
@@ -40,11 +40,14 @@ class SQLQueryGenerator:
         self.logger.info("SQLQueryGenerator initialized with MCP format.")
 
     def _default_logger(self):
+        # Ensure log directory exists
+        log_dir = Constants.LOG_PATH
+        os.makedirs(log_dir, exist_ok=True)
         logging.basicConfig(
             level=Constants.LOG_LEVEL,
             format=Constants.LOG_FORMAT,
             handlers=[
-                logging.FileHandler(f"{Constants.LOG_PATH}/sql_query_generator"),
+                logging.FileHandler(f"{log_dir}/sql_query_generator"),
                 logging.StreamHandler()
             ]
         )
@@ -95,7 +98,7 @@ class SQLQueryGenerator:
         return (
             f"You are an expert in SQL and use only {DbSqlAlchemyConstant.db_type} syntax.\n"
             "- If the query cannot be answered based on the schema, respond with \"NO_SQL\".\n"
-            f"Table Schemas:\n{schema_info}\n\n"
+            f"Table Schemas:\n{DBConstant.db_schema }\n\n"
             f"Natural Language Query:\n{natural_language_query}\n\n"
             "SQL Query:\n"
         )
@@ -151,3 +154,13 @@ class SQLQueryGenerator:
         return cleaned_query
 
 
+if __name__ == "__main__":
+    # Example usage
+    generator = SQLQueryGenerator()
+    natural_language_query = "What is the total sales amount for each product?"
+    table_schemas = {
+        "sales": "id INT, product_id INT, amount DECIMAL(10, 2), date DATE",
+        "products": "id INT, name VARCHAR(255)"
+    }
+    sql_query = generator.generate_sql_query(natural_language_query, table_schemas)
+    print(f"Generated SQL Query: {sql_query}")

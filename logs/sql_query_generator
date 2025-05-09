@@ -970,3 +970,59 @@ FROM Customer;
 2025-05-08 12:05:08,809 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
 2025-05-08 12:05:28,161 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employee are there
 2025-05-08 12:05:28,945 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-05-08 12:27:20,896 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:27:31,672 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:27:42,271 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-05-08 12:27:43,617 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) FROM Employee;
+2025-05-08 12:27:58,359 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provided there name
+2025-05-08 12:27:59,204 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 12:28:12,807 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provided their names
+2025-05-08 12:28:13,718 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT employee_name
+FROM Employee;
+2025-05-08 12:29:22,574 - src.codes.sql_query_generation - INFO - Natural Language Query: which department they are working on
+2025-05-08 12:29:23,448 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT department_name
+FROM Department
+WHERE department_id IN (
+    SELECT department_id
+    FROM Employee
+);
+2025-05-08 12:29:53,250 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provide employee with their department name
+2025-05-08 12:29:54,301 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT Employee.employee_name, Department.department_name
+FROM Employee
+JOIN Department ON Employee.department_id = Department.department_id;
+2025-05-08 12:30:07,156 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:30:44,304 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:31:20,903 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:31:34,680 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-05-08 12:31:35,397 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-05-08 12:31:48,866 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provided their names
+2025-05-08 12:31:49,523 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 12:32:02,581 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provided their name
+2025-05-08 12:32:03,400 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 12:36:31,195 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:36:37,045 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:37:19,622 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:40:16,887 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:41:03,211 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 12:41:05,600 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 14:23:21,902 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-05-08 14:23:23,032 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
+2025-05-08 14:23:34,324 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provide their name
+2025-05-08 14:23:35,112 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 14:23:45,309 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-05-08 14:23:46,069 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT employee_name FROM Employee;
+2025-05-08 17:04:36,762 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 17:13:54,019 - src.codes.sql_query_generation - INFO - Natural Language Query: fixed data
+2025-05-08 17:13:54,602 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 17:15:23,785 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employee are there
+2025-05-08 17:15:24,545 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS employee_count FROM Employee;
+2025-05-08 17:15:37,062 - src.codes.sql_query_generation - INFO - Natural Language Query: can you provide their names
+2025-05-08 17:15:37,796 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT employee_name
+FROM Employee;
+2025-05-08 17:20:25,684 - src.codes.sql_query_generation - INFO - Natural Language Query: what you can do is today
+2025-05-08 17:20:26,420 - src.codes.sql_query_generation - INFO - Generated SQL Query: None
+2025-05-08 17:20:31,448 - src.codes.sql_query_generation - INFO - Natural Language Query: kitne employee hai
+2025-05-08 17:20:32,736 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) FROM Employee;
+2025-05-08 22:13:05,325 - src.codes.sql_query_generation - INFO - SQLQueryGenerator initialized with OpenAI API key.
+2025-05-08 22:13:21,467 - src.codes.sql_query_generation - INFO - Natural Language Query: how many employees are there
+2025-05-08 22:13:22,395 - src.codes.sql_query_generation - INFO - Generated SQL Query: SELECT COUNT(employee_id) AS total_employees FROM Employee;
